@@ -1,3 +1,13 @@
+/*=======================================================================
+|| @Author: Alberto Cruz Luis
+|| @Email: alu0101217734@ull.edu.es
+|| @Github: https://github.com/AlbertoCruzLuis
+|| @Date: February 2021
+|| @University: ULL in Tenerife
+|| @Version: 01-StrategyDesignPattern
+|| @Info: https://sourcemaking.com/design_patterns/strategy
+=======================================================================*/
+
 #ifndef STRATEGYTEST_H
 #define STRATEGYTEST_H
 

@@ -11,28 +11,18 @@
 #include <chrono>
 #include <iostream>
 
-#include "Timer/timer.cpp"
-#include "matrix.hpp"
-#include "strategyTest.cpp"
+#include "GenerateCases/generateCases.cpp"
 
 int main(int argc, char const *argv[]) {
   try {
-    Matrix firstMatrix(500, 500, rand());
-    Matrix secondMatrix(500, 500, rand());
-
-    std::cout << "By Columns\n";
-    timer([firstMatrix, secondMatrix]() {
-      strategyColumnsTest(firstMatrix, secondMatrix);
-    });
-
-    std::cout << "By Rows\n";
-    timer([firstMatrix, secondMatrix]() {
-      strategyRowsTest(firstMatrix, secondMatrix);
-    });
-
+    generateCases(100, 1000, 1000, 100);
+    generateCases(500, 500, 500, 500);
+    generateCases(500, 500, 500, 1000);
+    generateCases(500, 1000, 1000, 100);
+    generateCases(500, 100, 100, 1000);
   } catch (const std::exception &except) {
     std::cerr << except.what() << '\n';
-  } catch (const std::string &except) {
+  } catch (const char *except) {
     std::cerr << except;
   }
 

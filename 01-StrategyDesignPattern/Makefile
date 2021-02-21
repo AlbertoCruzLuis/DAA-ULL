@@ -7,7 +7,7 @@ EXECUTABLE  := main
 CXX       := g++
 CXX_FLAGS := -I$(INCLUDE) -I$(TEST)
 
-.PHONY: all
+.PHONY: $(BIN)/$(EXECUTABLE)
 
 all: $(BIN)/$(EXECUTABLE)
 

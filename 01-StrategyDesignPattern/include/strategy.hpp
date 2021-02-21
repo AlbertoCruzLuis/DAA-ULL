@@ -25,9 +25,9 @@ class StrategyColumns : public Strategy {
     if (firstMatrix.get_cols() == secondMatrix.get_rows()) {
       Matrix productMatrix(firstMatrix.get_rows(), secondMatrix.get_cols());
       int sumProducts = 0;
-      for (size_t i = 0; i < firstMatrix.get_cols(); i++) {
-        for (size_t j = 0; j < secondMatrix.get_rows(); j++) {
-          for (size_t k = 0; k < firstMatrix.get_rows(); k++) {
+      for (size_t i = 0; i < firstMatrix.get_rows(); i++) {
+        for (size_t j = 0; j < secondMatrix.get_cols(); j++) {
+          for (size_t k = 0; k < firstMatrix.get_cols(); k++) {
             sumProducts += firstMatrix.get_value_pos(i, k) *
                            secondMatrix.get_value_pos(k, j);
           }
@@ -44,13 +44,13 @@ class StrategyColumns : public Strategy {
 class StrategyRows : public Strategy {
  public:
   Matrix multiply(Matrix firstMatrix, Matrix secondMatrix) {
-    if (firstMatrix.get_cols() == secondMatrix.get_cols()) {
+    if (firstMatrix.get_cols() == secondMatrix.get_rows()) {
       Matrix productMatrix(firstMatrix.get_rows(), secondMatrix.get_cols());
       Matrix secondMatrixTransposed = secondMatrix.transposed();
       int sumProducts = 0;
-      for (size_t i = 0; i < firstMatrix.get_cols(); i++) {
-        for (size_t j = 0; j < secondMatrix.get_rows(); j++) {
-          for (size_t k = 0; k < firstMatrix.get_rows(); k++) {
+      for (size_t i = 0; i < firstMatrix.get_rows(); i++) {
+        for (size_t j = 0; j < secondMatrix.get_cols(); j++) {
+          for (size_t k = 0; k < firstMatrix.get_cols(); k++) {
             sumProducts += firstMatrix.get_value_pos(i, k) *
                            secondMatrixTransposed.get_value_pos(j, k);
           }

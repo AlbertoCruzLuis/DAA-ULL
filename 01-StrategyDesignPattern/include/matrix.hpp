@@ -33,6 +33,7 @@ class Matrix {
   void fill_random_matrix(int min_range = 0, int max_range = 10);
   int get_value_pos(int row, int col) const;
   void set_value_pos(int row, int col, int value);
+  void operator=(const Matrix& other_matrix);
 
   friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix);
 };

@@ -33,10 +33,10 @@ void Matrix::set_value_pos(int row, int col, int value) {
 }
 
 Matrix Matrix::transposed() {
-  Matrix matrixTransposed(rows_, cols_);
+  Matrix matrixTransposed(cols_, rows_);
   for (size_t i = 0; i < rows_; i++) {
     for (size_t j = 0; j < cols_; j++) {
-      matrixTransposed.set_value_pos(i, j, matrix_[j][i]);
+      matrixTransposed.set_value_pos(j, i, matrix_[i][j]);
     }
   }
   return matrixTransposed;
@@ -49,6 +49,12 @@ void Matrix::fill_random_matrix(int min_range, int max_range) {
       matrix_[i][j] = (rand() % range) + min_range;
     }
   }
+}
+
+void Matrix::operator=(const Matrix& other_matrix) {
+  rows_ = other_matrix.rows_;
+  cols_ = other_matrix.cols_;
+  matrix_ = other_matrix.matrix_;
 }
 
 std::ostream& operator<<(std::ostream& os, const Matrix& matrix) {
