@@ -33,8 +33,8 @@ class FileParser {
   bool isComments(std::string line);
   bool isEmptyLine(std::string line);
   std::string findLabel(std::string line);
-  std::pair<std::string, std::string> findInstruction(std::string line);
-  Instruction* validateOperation(std::string name, std::string value);
+  Instruction findInstruction(std::string line);
+  Instruction* validateOperation(Instruction instruction);
 };
 
 #endif  // FILEPARSER_H

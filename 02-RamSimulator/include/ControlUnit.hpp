@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 
+#include "Memory.hpp"
 #include "Program.hpp"
 #include "ProgramCounter.hpp"
 
@@ -20,7 +21,7 @@ class ControlUnit {
   ~ControlUnit() {}
 
   void loadProgram(std::string program_name);
-  void executeProgram(bool state_machine);
+  void executeProgram(bool state_machine, Memory &memory);
 };
 
 #endif  // CONTROL_UNIT_H

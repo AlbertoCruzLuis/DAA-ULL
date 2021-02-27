@@ -2,15 +2,18 @@
 #define HALT_H
 
 #include "Instruction.hpp"
+#include "Memory.hpp"
 
 class Halt : public Instruction {
  private:
   /* data */
  public:
   Halt(/* args */) {}
-  Halt(std::string name, std::string value) : Instruction(name, value) {}
+  Halt(std::string name) : Instruction(name) {}
   ~Halt() {}
 
-  void execute() { std::cout << "Execute HALT" << std::endl; }
+  void execute(Memory memory, ProgramCounter programCounter) {
+    std::cout << "Execute HALT" << std::endl;
+  }
 };
 #endif  // HALT_H

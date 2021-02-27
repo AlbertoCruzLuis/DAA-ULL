@@ -5,10 +5,14 @@
 
 class Register {
  private:
-  /* data */
+  int value_;
+
  public:
-  Register(/* args */) {}
+  Register() {}
+  Register(int value);
   ~Register() {}
+
+  int get_value() const;
 
   friend std::ostream& operator<<(std::ostream& os, const Register& c_register);
 };

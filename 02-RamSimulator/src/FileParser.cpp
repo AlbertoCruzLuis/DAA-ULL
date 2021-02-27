@@ -26,20 +26,17 @@ void FileParser::analyzeFile() {
     if (!isComments(line) && !isEmptyLine(line)) {
       formattedData_.push_back(line);
       std::string label;
-      std::cout << line_counter << ": ";
+      // std::cout << line_counter << ": ";
       if ((label = findLabel(line)) != "") {
         // Add Label to List Labels
         list_label_.push_back(Label(label, line_counter));
         // std::cout << "Label -> " << label << "\t";
       }
 
-      std::pair<std::string, std::string> instruction = findInstruction(line);
-      std::cout << "Instruction: " << instruction.first << " "
-                << instruction.second << "\n";
+      Instruction instruction = findInstruction(line);
 
       // Validate Instructions & Set Instructions
-      list_instruction_.push_back(
-          validateOperation(instruction.first, instruction.second));
+      list_instruction_.push_back(validateOperation(instruction));
 
       /*for (auto&& instruction : list_instruction_) {
         instruction->execute();
@@ -65,20 +62,22 @@ bool FileParser::isComments(std::string line) {
   }
 }
 
-Instruction* FileParser::validateOperation(std::string name,
-                                           std::string value) {
+Instruction* FileParser::validateOperation(Instruction instruction) {
+  std::string name = instruction.get_name();
+  std::string value = instruction.get_value();
+  char mode = instruction.get_mode();
   if (name == "READ" || name == "read") {
-    return new Read(name, value);
+    return new Read(name, mode, value);
   } else if (name == "LOAD" || name == "load") {
-    return new Load(name, value);
+    return new Load(name, mode, value);
   } else if (name == "JUMP" || name == "jump") {
-    return new Jump(name, value);
+    return new Jump(name, mode, value);
   } else if (name == "JZERO" || name == "jzero") {
-    return new Jzero(name, value);
+    return new Jzero(name, mode, value);
   } else if (name == "WRITE" || name == "write") {
-    return new Write(name, value);
+    return new Write(name, mode, value);
   } else if (name == "HALT" || name == "halt") {
-    return new Halt(name, value);
+    return new Halt(name);
   }
 
   throw "Instruction Error";
@@ -99,11 +98,11 @@ std::string FileParser::findLabel(std::string line) {
   return "";
 }
 
-std::pair<std::string, std::string> FileParser::findInstruction(
-    std::string line) {
+Instruction FileParser::findInstruction(std::string line) {
   std::istringstream iss(line);
   std::string data;
   std::string instructionName;
+  char instructionMode;
   std::string instructionValue;
 
   iss >> data;
@@ -115,6 +114,10 @@ std::pair<std::string, std::string> FileParser::findInstruction(
   }
 
   iss >> instructionValue;
+  if (instructionValue.front() == '=' || instructionValue.front() == '*') {
+    instructionMode = instructionValue.front();
+    instructionValue.erase(instructionValue.begin());
+  }
 
-  return std::make_pair(instructionName, instructionValue);
+  return Instruction(instructionName, instructionMode, instructionValue);
 }
