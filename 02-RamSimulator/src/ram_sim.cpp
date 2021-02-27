@@ -11,7 +11,7 @@
 
 #include <iostream>
 
-#include "CommandLineArguments.h"
+#include "CommandLineArguments.hpp"
 #include "Menu.hpp"
 #include "RamMachine.hpp"
 

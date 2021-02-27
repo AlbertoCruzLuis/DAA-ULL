@@ -12,6 +12,12 @@ FileParser::FileParser(std::string inFileName) {
   analyzeFile();
 }
 
+std::vector<Label> FileParser::get_list_label() { return list_label_; }
+
+std::vector<Instruction*> FileParser::get_list_instructions() {
+  return list_instruction_;
+}
+
 void FileParser::analyzeFile() {
   std::string line;
   int line_counter = 0;
@@ -20,7 +26,7 @@ void FileParser::analyzeFile() {
     if (!isComments(line) && !isEmptyLine(line)) {
       formattedData_.push_back(line);
       std::string label;
-      // std::cout << line_counter << ": ";
+      std::cout << line_counter << ": ";
       if ((label = findLabel(line)) != "") {
         // Add Label to List Labels
         list_label_.push_back(Label(label, line_counter));
@@ -28,8 +34,8 @@ void FileParser::analyzeFile() {
       }
 
       std::pair<std::string, std::string> instruction = findInstruction(line);
-      /*std::cout << "Instruction: " << instruction.first << " "
-                << instruction.second << "\n";*/
+      std::cout << "Instruction: " << instruction.first << " "
+                << instruction.second << "\n";
 
       // Validate Instructions & Set Instructions
       list_instruction_.push_back(
@@ -43,7 +49,7 @@ void FileParser::analyzeFile() {
 
     line_counter++;
   }
-  file_.close();
+  // file_.close();
 }
 
 bool FileParser::isComments(std::string line) {
@@ -65,7 +71,16 @@ Instruction* FileParser::validateOperation(std::string name,
     return new Read(name, value);
   } else if (name == "LOAD" || name == "load") {
     return new Load(name, value);
+  } else if (name == "JUMP" || name == "jump") {
+    return new Jump(name, value);
+  } else if (name == "JZERO" || name == "jzero") {
+    return new Jzero(name, value);
+  } else if (name == "WRITE" || name == "write") {
+    return new Write(name, value);
+  } else if (name == "HALT" || name == "halt") {
+    return new Halt(name, value);
   }
+
   throw "Instruction Error";
 }
 

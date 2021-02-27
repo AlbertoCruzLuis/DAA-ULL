@@ -12,6 +12,9 @@ class RamMachine {
  private:
   Memory memory_;
   ControlUnit control_unit_;
+  InTape in_tape_;
+  OutTape out_tape_;
+  bool state_;  // State = 0 or Halt -> Stop the Machine | State = 1 Run
 
  public:
   RamMachine() {}

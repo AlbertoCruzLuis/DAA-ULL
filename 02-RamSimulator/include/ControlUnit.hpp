@@ -4,23 +4,23 @@
 #include <iostream>
 #include <vector>
 
-#include "FileParser.hpp"
-#include "Instruction.hpp"
-#include "Label.hpp"
+#include "Program.hpp"
+#include "ProgramCounter.hpp"
 
 /* ControlUnit: It is responsible for interpreting and processing the
  * instructions received from a program */
 
 class ControlUnit {
  private:
-  std::vector<Label> set_labels_;
-  std::vector<Instruction> set_instructions_;
+  Program program_;
+  ProgramCounter program_counter_;
 
  public:
   ControlUnit();
   ~ControlUnit() {}
 
   void loadProgram(std::string program_name);
+  void executeProgram(bool state_machine);
 };
 
 #endif  // CONTROL_UNIT_H

@@ -7,8 +7,12 @@
 #include <vector>
 
 #include "Instruction.hpp"
+#include "Instructions/Halt.hpp"
+#include "Instructions/Jump.hpp"
+#include "Instructions/Jzero.hpp"
 #include "Instructions/Load.hpp"
 #include "Instructions/Read.hpp"
+#include "Instructions/Write.hpp"
 #include "Label.hpp"
 
 class FileParser {
@@ -21,6 +25,9 @@ class FileParser {
  public:
   FileParser(std::string inFileName);
   ~FileParser() {}
+
+  std::vector<Label> get_list_label();
+  std::vector<Instruction*> get_list_instructions();
 
   void analyzeFile();
   bool isComments(std::string line);

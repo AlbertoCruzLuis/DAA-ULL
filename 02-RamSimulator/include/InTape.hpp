@@ -1,14 +1,27 @@
 #ifndef INTAPE_H
 #define INTAPE_H
 
-#include "Tape.hpp"
+#include <fstream>
+#include <sstream>
+#include <vector>
 
-class InTape : public Tape {
+class InTape {
  private:
-  /* data */
+  std::vector<int> data_;
+  std::fstream* file_;
+
  public:
-  InTape(/* args */) {}
-  ~InTape() {}
+  InTape() {}
+  InTape(std::string nameFile);
+  ~InTape();
+
+  std::vector<int> get_data() const;
+
+  void analyzeFile();
+  void addData(std::string line);
+
+  friend std::ostream& operator<<(std::ostream& os, const InTape& in_tape);
+  friend std::ostream& operator<<(std::ostream& os, const InTape* in_tape);
 };
 
 #endif  // INTAPE_H

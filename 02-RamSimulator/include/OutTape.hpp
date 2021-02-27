@@ -1,14 +1,23 @@
 #ifndef OUTTAPE_H
 #define OUTTAPE_H
 
-#include "Tape.hpp"
-
-class OutTape : public Tape {
+#include <fstream>
+#include <iostream>
+#include <vector>
+class OutTape {
  private:
-  /* data */
+  std::vector<int> data_;
+  std::fstream* file_;
+
  public:
-  OutTape(/* args */) {}
-  ~OutTape() {}
+  OutTape() {}
+  OutTape(std::string nameFile);
+  ~OutTape();
+
+  std::vector<int> get_data();
+
+  friend std::ostream& operator<<(std::ostream& os, const OutTape& out_tape);
+  friend std::ostream& operator<<(std::ostream& os, const OutTape* out_tape);
 };
 
 #endif  // OUTTAPE_H
