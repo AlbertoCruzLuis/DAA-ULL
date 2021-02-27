@@ -14,6 +14,8 @@ class Register {
 
   int get_value() const;
 
+  operator int() const;
+
   friend std::ostream& operator<<(std::ostream& os, const Register& c_register);
 };
 

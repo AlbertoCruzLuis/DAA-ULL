@@ -30,21 +30,16 @@ void FileParser::analyzeFile() {
       if ((label = findLabel(line)) != "") {
         // Add Label to List Labels
         list_label_.push_back(Label(label, line_counter));
-        // std::cout << "Label -> " << label << "\t";
+        /*std::cout << "LabelParse ->" << line_counter << ": " << label
+                  << std::endl;*/
       }
 
       Instruction instruction = findInstruction(line);
 
       // Validate Instructions & Set Instructions
       list_instruction_.push_back(validateOperation(instruction));
-
-      /*for (auto&& instruction : list_instruction_) {
-        instruction->execute();
-        std::cout << instruction << std::endl;
-      }*/
+      line_counter++;
     }
-
-    line_counter++;
   }
   // file_.close();
 }

@@ -15,6 +15,9 @@ class OutTape {
   ~OutTape();
 
   std::vector<int> get_data();
+  void add(int value);
+
+  void writeToFile();
 
   friend std::ostream& operator<<(std::ostream& os, const OutTape& out_tape);
   friend std::ostream& operator<<(std::ostream& os, const OutTape* out_tape);

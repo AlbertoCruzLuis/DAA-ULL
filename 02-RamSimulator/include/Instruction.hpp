@@ -2,9 +2,13 @@
 #define INSTRUCTION_H
 
 #include <iostream>
+#include <vector>
 
 #include "AddressingMode.hpp"
+#include "InTape.hpp"
+#include "Label.hpp"
 #include "Memory.hpp"
+#include "OutTape.hpp"
 #include "ProgramCounter.hpp"
 
 class Instruction {
@@ -26,7 +30,9 @@ class Instruction {
   std::string get_value();
   char get_mode();
 
-  virtual void execute(Memory memory, ProgramCounter programCounter) {}
+  virtual bool execute(Memory& memory, ProgramCounter& programCounter,
+                       InTape& inTape, OutTape& outTape,
+                       std::vector<Label> list_label) {}
   friend std::ostream& operator<<(std::ostream& os,
                                   const Instruction& instruction);
   friend std::ostream& operator<<(std::ostream& os,

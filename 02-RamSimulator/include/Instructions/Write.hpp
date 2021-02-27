@@ -1,8 +1,12 @@
 #ifndef WRITE_H
 #define WRITE_H
 
+#include "InTape.hpp"
 #include "Instruction.hpp"
+#include "Label.hpp"
 #include "Memory.hpp"
+#include "OutTape.hpp"
+#include "ProgramCounter.hpp"
 
 class Write : public Instruction {
  private:
@@ -13,8 +17,20 @@ class Write : public Instruction {
       : Instruction(name, mode, value) {}
   ~Write() {}
 
-  void execute(Memory memory, ProgramCounter programCounter) {
+  bool execute(Memory& memory, ProgramCounter& programCounter, InTape& inTape,
+               OutTape& outTape, std::vector<Label> listLabel) {
     std::cout << "Execute WRITE" << std::endl;
+    int id_register = std::stoi(value_);
+    int valueOfRegister = memory.read(id_register);
+    std::cout << "ValueOfRegister -> " << valueOfRegister << std::endl;
+    if (addressing_mode_.get_mode() == INMEDIATE) {
+    }
+    if (addressing_mode_.get_mode() == INDIRECT) {
+    }
+    if (addressing_mode_.get_mode() == DIRECT) {
+      outTape.add(valueOfRegister);
+    }
+    programCounter.next_address();
   }
 };
 

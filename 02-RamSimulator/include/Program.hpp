@@ -19,6 +19,7 @@ class Program {
 
   std::vector<Label> get_list_label();
   std::vector<Instruction*> get_list_instructions();
+
   // Method: How memory is assign to this program
 };
 

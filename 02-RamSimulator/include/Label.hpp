@@ -12,6 +12,9 @@ class Label {
  public:
   Label(std::string name, int line_position);
   ~Label() {}
+
+  std::string get_name();
+  int get_line_position();
 };
 
 #endif  // LABEL_H

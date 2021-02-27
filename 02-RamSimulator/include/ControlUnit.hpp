@@ -4,7 +4,9 @@
 #include <iostream>
 #include <vector>
 
+#include "InTape.hpp"
 #include "Memory.hpp"
+#include "OutTape.hpp"
 #include "Program.hpp"
 #include "ProgramCounter.hpp"
 
@@ -21,7 +23,8 @@ class ControlUnit {
   ~ControlUnit() {}
 
   void loadProgram(std::string program_name);
-  void executeProgram(bool state_machine, Memory &memory);
+  void executeProgram(bool state_machine, Memory& memory, InTape& inTape,
+                      OutTape& outTape);
 };
 
 #endif  // CONTROL_UNIT_H

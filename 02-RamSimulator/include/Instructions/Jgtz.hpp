@@ -1,8 +1,12 @@
 #ifndef JGTZ_H
 #define JGTZ_H
 
+#include "InTape.hpp"
 #include "Instruction.hpp"
+#include "Label.hpp"
 #include "Memory.hpp"
+#include "OutTape.hpp"
+#include "ProgramCounter.hpp"
 
 class Jgtz : public Instruction {
  private:
@@ -13,7 +17,8 @@ class Jgtz : public Instruction {
       : Instruction(name, mode, value) {}
   ~Jgtz() {}
 
-  void execute(Memory memory, ProgramCounter programCounter) {
+  bool execute(Memory& memory, ProgramCounter& programCounter, InTape& inTape,
+               OutTape& outTape, std::vector<Label> listLabel) {
     std::cout << "Execute JGTZ" << std::endl;
   }
 };

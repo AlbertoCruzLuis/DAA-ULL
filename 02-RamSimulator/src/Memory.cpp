@@ -2,7 +2,7 @@
 
 Memory::Memory() {
   const int NUM_REGISTER = 14;
-  register_bank_.resize(NUM_REGISTER);
+  register_bank_.assign(NUM_REGISTER, Register(-1));
 }
 
 Register Memory::read(int id_register) { return register_bank_[id_register]; }

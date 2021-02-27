@@ -9,6 +9,6 @@ Program::Program(std::string program_name) {
 
 std::vector<Label> Program::get_list_label() { return list_labels_; }
 
-std::vector<Instruction*> Program::get_list_instructions() {
+std::vector<Instruction *> Program::get_list_instructions() {
   return list_instructions_;
 }

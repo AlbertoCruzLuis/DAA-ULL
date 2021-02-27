@@ -1,8 +1,12 @@
 #ifndef ADD_H
 #define ADD_H
 
+#include "InTape.hpp"
 #include "Instruction.hpp"
+#include "Label.hpp"
 #include "Memory.hpp"
+#include "OutTape.hpp"
+#include "ProgramCounter.hpp"
 
 class Add : public Instruction {
  private:
@@ -13,17 +17,16 @@ class Add : public Instruction {
       : Instruction(name, mode, value) {}
   ~Add() {}
 
-  void execute(Memory memory, ProgramCounter programCounter) {
+  bool execute(Memory& memory, ProgramCounter& programCounter, InTape& inTape,
+               OutTape& outTape, std::vector<Label> listLabel) {
     std::cout << "Execute ADD" << std::endl;
     if (addressing_mode_.get_mode() == INMEDIATE) {
-      /* code */
     }
     if (addressing_mode_.get_mode() == INDIRECT) {
-      /* code */
     }
     if (addressing_mode_.get_mode() == DIRECT) {
-      /* code */
     }
+    programCounter.next_address();
   }
 };
 
