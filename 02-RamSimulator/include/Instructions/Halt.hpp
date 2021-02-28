@@ -29,7 +29,7 @@ class Halt : public Instruction {
 
   bool execute(Memory& memory, ProgramCounter& programCounter, InTape& inTape,
                OutTape& outTape, std::vector<Label> listLabel) {
-    std::cout << "Execute HALT" << std::endl;
+    // std::cout << "Execute HALT" << std::endl;
     outTape.writeToFile();
     bool stateStop = 0;
     return stateStop;

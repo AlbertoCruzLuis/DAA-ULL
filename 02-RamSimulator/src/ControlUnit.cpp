@@ -17,7 +17,6 @@ void ControlUnit::executeProgram(bool state_machine, Memory &memory,
     state_machine = current_instruction->execute(
         memory, program_counter_, inTape, outTape, program_.get_list_label());
     std::cout << "CurrentAddress: " << current_address << std::endl;
-    std::cout << "CurrentInstruction: "
-              << program_.get_list_instructions()[current_address] << std::endl;
+    std::cout << program_.get_list_instructions()[current_address] << std::endl;
   }
 }

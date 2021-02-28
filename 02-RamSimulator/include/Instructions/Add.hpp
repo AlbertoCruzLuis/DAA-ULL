@@ -30,13 +30,20 @@ class Add : public Instruction {
 
   bool execute(Memory& memory, ProgramCounter& programCounter, InTape& inTape,
                OutTape& outTape, std::vector<Label> listLabel) {
-    std::cout << "Execute ADD" << std::endl;
+    // std::cout << "Execute ADD" << std::endl;
+    int id_register = std::stoi(value_);
+    int valueOfRegister = memory.read(id_register);
+    int result_add;
     if (addressing_mode_.get_mode() == INMEDIATE) {
+      result_add = memory.read() + id_register;
     }
     if (addressing_mode_.get_mode() == INDIRECT) {
+      result_add = memory.read() + memory.read(valueOfRegister);
     }
     if (addressing_mode_.get_mode() == DIRECT) {
+      result_add = memory.read() + valueOfRegister;
     }
+    memory.write(result_add);
     programCounter.next_address();
   }
 };

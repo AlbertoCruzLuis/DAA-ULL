@@ -32,7 +32,7 @@ class Jzero : public Instruction {
 
   bool execute(Memory& memory, ProgramCounter& programCounter, InTape& inTape,
                OutTape& outTape, std::vector<Label> listLabel) {
-    std::cout << "Execute JZERO" << std::endl;
+    // std::cout << "Execute JZERO" << std::endl;
     if ((addressing_mode_.get_mode() == INMEDIATE) ||
         (addressing_mode_.get_mode() == INDIRECT)) {
       // Error Addressing Deneged

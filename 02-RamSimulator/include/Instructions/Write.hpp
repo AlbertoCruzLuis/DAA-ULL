@@ -30,17 +30,20 @@ class Write : public Instruction {
 
   bool execute(Memory& memory, ProgramCounter& programCounter, InTape& inTape,
                OutTape& outTape, std::vector<Label> listLabel) {
-    std::cout << "Execute WRITE" << std::endl;
+    // std::cout << "Execute WRITE" << std::endl;
     int id_register = std::stoi(value_);
     int valueOfRegister = memory.read(id_register);
-    std::cout << "ValueOfRegister -> " << valueOfRegister << std::endl;
+    int dataToWrite;
     if (addressing_mode_.get_mode() == INMEDIATE) {
+      dataToWrite = id_register;
     }
     if (addressing_mode_.get_mode() == INDIRECT) {
+      dataToWrite = memory.read(valueOfRegister);
     }
     if (addressing_mode_.get_mode() == DIRECT) {
-      outTape.add(valueOfRegister);
+      dataToWrite = valueOfRegister;
     }
+    outTape.add(dataToWrite);
     programCounter.next_address();
   }
 };

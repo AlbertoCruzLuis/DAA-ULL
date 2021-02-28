@@ -18,11 +18,15 @@
 #include <vector>
 
 #include "Instruction.hpp"
+#include "Instructions/Add.hpp"
 #include "Instructions/Halt.hpp"
 #include "Instructions/Jump.hpp"
 #include "Instructions/Jzero.hpp"
 #include "Instructions/Load.hpp"
+#include "Instructions/Mult.hpp"
 #include "Instructions/Read.hpp"
+#include "Instructions/Store.hpp"
+#include "Instructions/Sub.hpp"
 #include "Instructions/Write.hpp"
 #include "Label.hpp"
 

@@ -30,12 +30,14 @@ class Load : public Instruction {
 
   bool execute(Memory& memory, ProgramCounter& programCounter, InTape& inTape,
                OutTape& outTape, std::vector<Label> listLabel) {
-    std::cout << "Execute LOAD" << std::endl;
+    // std::cout << "Execute LOAD" << std::endl;
     int id_register = std::stoi(value_);
     int valueOfRegister = memory.read(id_register);
     if (addressing_mode_.get_mode() == INMEDIATE) {
+      memory.write(id_register);
     }
     if (addressing_mode_.get_mode() == INDIRECT) {
+      memory.write(memory.read(valueOfRegister));
     }
     if (addressing_mode_.get_mode() == DIRECT) {
       memory.write(valueOfRegister);

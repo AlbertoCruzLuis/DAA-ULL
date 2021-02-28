@@ -30,10 +30,11 @@ class Read : public Instruction {
 
   bool execute(Memory& memory, ProgramCounter& programCounter, InTape& inTape,
                OutTape& outTape, std::vector<Label> listLabel) {
-    std::cout << "Execute READ" << std::endl;
+    // std::cout << "Execute READ" << std::endl;
     if ((addressing_mode_.get_mode() == INMEDIATE) ||
         (addressing_mode_.get_mode() == INDIRECT)) {
-      // Error Addressing Deneged
+      // Check!
+      throw "Error Addressing Mode. Addressing Mode not Allowed";
     }
     // Indirect mode working only when the register what pointed is valid
     if (addressing_mode_.get_mode() == DIRECT) {

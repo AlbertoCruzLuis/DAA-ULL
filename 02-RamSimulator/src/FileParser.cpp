@@ -21,19 +21,18 @@ std::vector<Instruction*> FileParser::get_list_instructions() {
 void FileParser::analyzeFile() {
   std::string line;
   int line_counter = 0;
-  while (getline(file_, line)) {
+  // file_ >> std::ws -> Discard the white space
+  while (getline(file_ >> std::ws, line)) {
     // Check Comments & EmptyLine
     if (!isComments(line) && !isEmptyLine(line)) {
       formattedData_.push_back(line);
       std::string label;
       // std::cout << line_counter << ": ";
+      // std::cout << "Line: " << line << std::endl;
       if ((label = findLabel(line)) != "") {
         // Add Label to List Labels
         list_label_.push_back(Label(label, line_counter));
-        /*std::cout << "LabelParse ->" << line_counter << ": " << label
-                  << std::endl;*/
       }
-
       Instruction instruction = findInstruction(line);
 
       // Validate Instructions & Set Instructions
@@ -73,9 +72,17 @@ Instruction* FileParser::validateOperation(Instruction instruction) {
     return new Write(name, mode, value);
   } else if (name == "HALT" || name == "halt") {
     return new Halt(name);
+  } else if (name == "STORE" || name == "store") {
+    return new Store(name, mode, value);
+  } else if (name == "SUB" || name == "sub") {
+    return new Sub(name, mode, value);
+  } else if (name == "ADD" || name == "add") {
+    return new Add(name, mode, value);
+  } else if (name == "MULT" || name == "mult") {
+    return new Mult(name, mode, value);
   }
 
-  throw "Instruction Error";
+  throw "Instruction Error. This Instruction Not Valid";
 }
 
 bool FileParser::isEmptyLine(std::string line) {
@@ -101,6 +108,7 @@ Instruction FileParser::findInstruction(std::string line) {
   std::string instructionValue;
 
   iss >> data;
+
   // Check if not exist label
   if (findLabel(data) == "") {
     instructionName = data;
