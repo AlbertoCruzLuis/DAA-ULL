@@ -36,6 +36,8 @@ int InTape::read() {
   return value;
 }
 
+void InTape::reset() { tape_position_ = 0; }
+
 std::ostream& operator<<(std::ostream& os, const InTape* in_tape) {
   for (auto&& element : in_tape->get_data()) {
     os << element << " - ";

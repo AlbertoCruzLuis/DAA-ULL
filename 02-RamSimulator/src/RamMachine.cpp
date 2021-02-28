@@ -14,6 +14,7 @@ void RamMachine::showRegisterOfMemory() { std::cout << memory_ << std::endl; }
 void RamMachine::desensamblador() {}
 
 void RamMachine::execute() {
+  reset();
   // Execute Instructions
   control_unit_.executeProgram(state_, memory_, in_tape_, out_tape_);
 }
@@ -21,3 +22,9 @@ void RamMachine::execute() {
 void RamMachine::showInputTape() { std::cout << in_tape_ << "\n"; }
 
 void RamMachine::showOutputTape() { std::cout << out_tape_ << "\n"; }
+
+void RamMachine::reset() {
+  memory_.reset();
+  in_tape_.reset();
+  out_tape_.reset();
+}

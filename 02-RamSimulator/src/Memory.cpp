@@ -1,14 +1,16 @@
 #include "Memory.hpp"
 
-Memory::Memory() {
-  const int NUM_REGISTER = 14;
-  register_bank_.assign(NUM_REGISTER, Register(-1));
-}
+Memory::Memory() { register_bank_.assign(NUM_REGISTER, Register(-1)); }
 
 Register Memory::read(int id_register) { return register_bank_[id_register]; }
 
 void Memory::write(int value, int id_register) {
   register_bank_[id_register] = Register(value);
+}
+
+void Memory::reset() {
+  register_bank_.clear();
+  register_bank_.assign(NUM_REGISTER, Register(-1));
 }
 
 std::ostream& operator<<(std::ostream& os, const Memory& memory) {

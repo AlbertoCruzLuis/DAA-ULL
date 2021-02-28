@@ -1,3 +1,14 @@
+/*=======================================================================
+|| @Author: Alberto Cruz Luis
+|| @Email: alu0101217734@ull.edu.es
+|| @Github: https://github.com/AlbertoCruzLuis
+|| @Date: February / March 2021
+|| @University: ULL in Tenerife
+|| @Course: DAA
+|| @Version: 02-RamSimulator
+|| @Info: https://www.emustudio.net/documentation/user/ram/ram-cpu
+=======================================================================*/
+
 #ifndef READ_H
 #define READ_H
 
@@ -27,7 +38,7 @@ class Read : public Instruction {
     // Indirect mode working only when the register what pointed is valid
     if (addressing_mode_.get_mode() == DIRECT) {
       int valueToInsert = inTape.read();
-      std::cout << "VAlueToInsert ->" << valueToInsert << std::endl;
+      // std::cout << "VAlueToInsert ->" << valueToInsert << std::endl;
       int id_register = stoi(value_);
       memory.read();
       memory.write(valueToInsert, id_register);

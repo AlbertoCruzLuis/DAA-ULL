@@ -17,12 +17,21 @@ void OutTape::writeToFile() {
   file_->close();
 }
 
+void OutTape::reset() { data_.clear(); }
+
 std::ostream& operator<<(std::ostream& os, const OutTape* out_tape) {
   // Show Data
+  for (auto&& value : out_tape->data_) {
+    os << value << " ";
+  }
+
   return os;
 }
 
 std::ostream& operator<<(std::ostream& os, const OutTape& out_tape) {
   // Show Data
+  for (auto&& value : out_tape.data_) {
+    os << value << " ";
+  }
   return os;
 }
