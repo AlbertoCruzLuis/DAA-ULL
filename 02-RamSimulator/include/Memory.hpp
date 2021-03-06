@@ -14,22 +14,21 @@
 
 #include <vector>
 
-#include "Register.hpp"
+#include "Registers.hpp"
 
 /* Memory: Save and Load the Registers
  * Register Accumulator: Register 0 of Register Bank  */
 
 class Memory {
  private:
-  const int NUM_REGISTER = 14;
-  std::vector<Register> register_bank_;
+  const int REGISTER_SIZE = 14;
+  Registers register_bank_;
 
  public:
   Memory();
   ~Memory() {}
 
-  std::vector<Register> get_register_bank();
-  Register read(int id_register = 0);
+  int read(int id_register = 0);
   void write(int value, int id_register = 0);
   void reset();
 

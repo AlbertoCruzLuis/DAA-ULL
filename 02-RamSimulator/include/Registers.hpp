@@ -9,25 +9,26 @@
 || @Info: https://www.emustudio.net/documentation/user/ram/ram-cpu
 =======================================================================*/
 
-#ifndef REGISTER_H
-#define REGISTER_H
+#ifndef REGISTERS_H
+#define REGISTERS_H
 
 #include <iostream>
+#include <map>
 
-class Register {
+class Registers {
  private:
-  int value_;
+  std::map<int, int> register_bank_;
 
  public:
-  Register() {}
-  Register(int value);
-  ~Register() {}
+  Registers(/* args */) {}
+  ~Registers() {}
 
-  int get_value() const;
+  void assign(int register_size);
+  void push(int id, int value);
+  int operator[](int id);
+  void clear();
 
-  operator int() const;
-
-  friend std::ostream& operator<<(std::ostream& os, const Register& c_register);
+  friend std::ostream& operator<<(std::ostream& os, const Registers& registers);
 };
 
-#endif  // REGISTER_H
+#endif  // REGISTERS_H

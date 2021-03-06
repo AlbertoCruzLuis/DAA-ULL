@@ -1,22 +1,20 @@
 #include "Memory.hpp"
 
-Memory::Memory() { register_bank_.assign(NUM_REGISTER, Register(-1)); }
+Memory::Memory() { register_bank_.assign(REGISTER_SIZE); }
 
-Register Memory::read(int id_register) { return register_bank_[id_register]; }
+int Memory::read(int id_register) { return register_bank_[id_register]; }
 
 void Memory::write(int value, int id_register) {
-  register_bank_[id_register] = Register(value);
+  register_bank_.push(id_register, value);
 }
 
 void Memory::reset() {
   register_bank_.clear();
-  register_bank_.assign(NUM_REGISTER, Register(-1));
+  register_bank_.assign(REGISTER_SIZE);
 }
 
 std::ostream& operator<<(std::ostream& os, const Memory& memory) {
-  for (auto&& c_register : memory.register_bank_) {
-    os << c_register << "\n";
-  }
+  os << memory.register_bank_;
 
   return os;
 }
