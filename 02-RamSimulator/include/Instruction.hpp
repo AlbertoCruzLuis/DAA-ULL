@@ -2,7 +2,7 @@
 || @Author: Alberto Cruz Luis
 || @Email: alu0101217734@ull.edu.es
 || @Github: https://github.com/AlbertoCruzLuis
-|| @Date: February / March 2021
+|| @Date: March 2021
 || @University: ULL in Tenerife
 || @Course: DAA
 || @Version: 02-RamSimulator
@@ -17,7 +17,7 @@
 
 #include "AddressingMode.hpp"
 #include "InTape.hpp"
-#include "Label.hpp"
+#include "Labels.hpp"
 #include "Memory.hpp"
 #include "OutTape.hpp"
 #include "ProgramCounter.hpp"
@@ -42,8 +42,7 @@ class Instruction {
   char get_mode();
 
   virtual bool execute(Memory& memory, ProgramCounter& programCounter,
-                       InTape& inTape, OutTape& outTape,
-                       std::vector<Label> list_label) {}
+                       InTape& inTape, OutTape& outTape, Labels list_label) {}
   friend std::ostream& operator<<(std::ostream& os,
                                   const Instruction& instruction);
   friend std::ostream& operator<<(std::ostream& os,

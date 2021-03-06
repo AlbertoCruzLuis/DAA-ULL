@@ -2,7 +2,7 @@
 || @Author: Alberto Cruz Luis
 || @Email: alu0101217734@ull.edu.es
 || @Github: https://github.com/AlbertoCruzLuis
-|| @Date: February / March 2021
+|| @Date: March 2021
 || @University: ULL in Tenerife
 || @Course: DAA
 || @Version: 02-RamSimulator
@@ -16,7 +16,7 @@
 
 #include "InTape.hpp"
 #include "Instruction.hpp"
-#include "Label.hpp"
+#include "Labels.hpp"
 #include "Memory.hpp"
 #include "OutTape.hpp"
 #include "Program.hpp"
@@ -32,7 +32,7 @@ class Jump : public Instruction {
   ~Jump() {}
 
   bool execute(Memory& memory, ProgramCounter& programCounter, InTape& inTape,
-               OutTape& outTape, std::vector<Label> listLabel) {
+               OutTape& outTape, Labels listLabel) {
     // std::cout << "Execute JUMP" << std::endl;
     if ((addressing_mode_.get_mode() == INMEDIATE) ||
         (addressing_mode_.get_mode() == INDIRECT)) {
@@ -42,18 +42,9 @@ class Jump : public Instruction {
     if (addressing_mode_.get_mode() == DIRECT) {
       // Browse the Label what pointed Instruction in listLabel
 
-      int positionToJump = findLabel(value_, listLabel).get_line_position();
+      int positionToJump = listLabel[value_];
       programCounter.set_address(positionToJump);
     }
-  }
-
-  Label findLabel(std::string name, std::vector<Label> listLabel) {
-    for (auto&& label : listLabel) {
-      if (label.get_name() == name) {
-        return label;
-      }
-    }
-    throw "Error. This Label Not Exist";
   }
 };
 #endif  // JUMP_H

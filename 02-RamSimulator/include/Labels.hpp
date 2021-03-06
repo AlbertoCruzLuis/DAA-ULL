@@ -2,30 +2,30 @@
 || @Author: Alberto Cruz Luis
 || @Email: alu0101217734@ull.edu.es
 || @Github: https://github.com/AlbertoCruzLuis
-|| @Date: February / March 2021
+|| @Date: March 2021
 || @University: ULL in Tenerife
 || @Course: DAA
 || @Version: 02-RamSimulator
 || @Info: https://www.emustudio.net/documentation/user/ram/ram-cpu
 =======================================================================*/
 
-#ifndef LABEL_H
-#define LABEL_H
+#ifndef LABELS_H
+#define LABELS_H
 
 #include <iostream>
-#include <vector>
+#include <map>
 
-class Label {
+class Labels {
+  std::map<std::string, int> list_labels_;
+
  private:
-  std::string name_;
-  int line_position_;
-
+  /* data */
  public:
-  Label(std::string name, int line_position);
-  ~Label() {}
+  Labels() {}
+  ~Labels() {}
 
-  std::string get_name();
-  int get_line_position();
+  int operator[](std::string name);
+  void push(std::string name, int line_position);
 };
 
-#endif  // LABEL_H
+#endif  // LABELS_H

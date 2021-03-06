@@ -1,4 +1,15 @@
 #include "FileParser.hpp"
+
+#include "Instructions/Add.hpp"
+#include "Instructions/Halt.hpp"
+#include "Instructions/Jump.hpp"
+#include "Instructions/Jzero.hpp"
+#include "Instructions/Load.hpp"
+#include "Instructions/Mult.hpp"
+#include "Instructions/Read.hpp"
+#include "Instructions/Store.hpp"
+#include "Instructions/Sub.hpp"
+#include "Instructions/Write.hpp"
 /**
  * @brief Construct a new FileParser::FileParser object
  *
@@ -12,7 +23,7 @@ FileParser::FileParser(std::string inFileName) {
   analyzeFile();
 }
 
-std::vector<Label> FileParser::get_list_label() { return list_label_; }
+Labels FileParser::get_list_label() { return list_label_; }
 
 std::vector<Instruction*> FileParser::get_list_instructions() {
   return list_instruction_;
@@ -25,13 +36,12 @@ void FileParser::analyzeFile() {
   while (getline(file_ >> std::ws, line)) {
     // Check Comments & EmptyLine
     if (!isComments(line) && !isEmptyLine(line)) {
-      formattedData_.push_back(line);
-      std::string label;
+      std::string label_name;
       // std::cout << line_counter << ": ";
       // std::cout << "Line: " << line << std::endl;
-      if ((label = findLabel(line)) != "") {
+      if ((label_name = findLabel(line)) != "") {
         // Add Label to List Labels
-        list_label_.push_back(Label(label, line_counter));
+        list_label_.push(label_name, line_counter);
       }
       Instruction instruction = findInstruction(line);
 

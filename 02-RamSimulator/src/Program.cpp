@@ -7,7 +7,7 @@ Program::Program(std::string program_name) {
   list_instructions_ = fileParser.get_list_instructions();
 }
 
-std::vector<Label> Program::get_list_label() { return list_labels_; }
+Labels Program::get_list_label() { return list_labels_; }
 
 std::vector<Instruction *> Program::get_list_instructions() {
   return list_instructions_;
