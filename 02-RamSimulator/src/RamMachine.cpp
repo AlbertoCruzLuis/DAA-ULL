@@ -13,10 +13,11 @@ void RamMachine::showRegisterOfMemory() { std::cout << memory_ << std::endl; }
 
 void RamMachine::desensamblador() {}
 
-void RamMachine::execute() {
+void RamMachine::execute(bool mode_trace) {
   reset();
   // Execute Instructions
-  control_unit_.executeProgram(state_, memory_, in_tape_, out_tape_);
+  control_unit_.executeProgram(state_, memory_, in_tape_, out_tape_,
+                               mode_trace);
 }
 
 void RamMachine::showInputTape() { std::cout << in_tape_ << "\n"; }

@@ -20,8 +20,8 @@ std::ostream& operator<<(std::ostream& os, const Instruction& instruction) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Instruction* instruction) {
-  os << "NamePointer: " << instruction->name_
-     << " AddressingMode: " << instruction->addressing_mode_;
-  if (instruction->value_ != "") os << " Value: " << instruction->value_;
+  os << "Name: " << instruction->name_
+     << " | AddressingMode: " << instruction->addressing_mode_;
+  if (instruction->value_ != "") os << " | Value: " << instruction->value_;
   return os;
 }

@@ -13,8 +13,10 @@ Menu::Menu(RamMachine ramMachine) {
       case 'r':
         ramMachine.showRegisterOfMemory();
         break;
-      case 't':  // Traza
-        break;
+      case 't': {
+        bool mode_trace = true;
+        ramMachine.execute(mode_trace);
+      } break;
       case 'e':
         ramMachine.execute();
         break;

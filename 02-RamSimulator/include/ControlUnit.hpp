@@ -35,7 +35,7 @@ class ControlUnit {
 
   void loadProgram(std::string program_name);
   void executeProgram(bool state_machine, Memory& memory, InTape& inTape,
-                      OutTape& outTape);
+                      OutTape& outTape, bool mode_trace);
 };
 
 #endif  // CONTROL_UNIT_H
