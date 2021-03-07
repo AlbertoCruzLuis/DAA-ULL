@@ -34,7 +34,7 @@ class Store : public Instruction {
     int id_register = std::stoi(value_);
     int valueOfRegister = memory.read(id_register);
     if (addressing_mode_.get_mode() == INMEDIATE) {
-      throw "Error Addressing Mode. Addressing Mode not Allowed";
+      throw "Error Addressing Mode. Addressing Mode for Store not Allowed";
     }
     if (addressing_mode_.get_mode() == INDIRECT) {
       memory.write(memory.read(), valueOfRegister);

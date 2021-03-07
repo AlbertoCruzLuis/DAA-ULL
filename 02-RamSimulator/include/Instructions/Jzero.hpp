@@ -35,7 +35,7 @@ class Jzero : public Instruction {
     // std::cout << "Execute JZERO" << std::endl;
     if ((addressing_mode_.get_mode() == INMEDIATE) ||
         (addressing_mode_.get_mode() == INDIRECT)) {
-      // Error Addressing Deneged
+      throw "Error Addressing Mode. Addressing Mode for Jzero not Allowed";
     }
     if (addressing_mode_.get_mode() == DIRECT) {
       int value_accumalator = memory.read();

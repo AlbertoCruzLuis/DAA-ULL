@@ -34,7 +34,7 @@ class Read : public Instruction {
     if ((addressing_mode_.get_mode() == INMEDIATE) ||
         (addressing_mode_.get_mode() == INDIRECT)) {
       // Check!
-      throw "Error Addressing Mode. Addressing Mode not Allowed";
+      throw "Error Addressing Mode. Addressing Mode for Read not Allowed";
     }
     // Indirect mode working only when the register what pointed is valid
     if (addressing_mode_.get_mode() == DIRECT) {

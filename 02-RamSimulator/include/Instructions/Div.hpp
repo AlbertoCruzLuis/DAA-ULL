@@ -23,14 +23,37 @@ class Div : public Instruction {
  private:
   /* data */
  public:
-  Div(/* args */) {}
+  Div() {}
   Div(std::string name, char mode, std::string value)
       : Instruction(name, mode, value) {}
   ~Div() {}
 
   bool execute(Memory& memory, ProgramCounter& programCounter, InTape& inTape,
                OutTape& outTape, Labels listLabel) {
-    std::cout << "Execute DIV" << std::endl;
+    // std::cout << "Execute DIV" << std::endl;
+    int id_register = std::stoi(value_);
+    int valueOfRegister = memory.read(id_register);
+    int result_add;
+    if (addressing_mode_.get_mode() == INMEDIATE) {
+      if (id_register == 0) {
+        throw "Error. Division by 0";
+      }
+      result_add = memory.read() / id_register;
+    }
+    if (addressing_mode_.get_mode() == INDIRECT) {
+      if (memory.read(valueOfRegister) == 0) {
+        throw "Error. Division by 0";
+      }
+      result_add = memory.read() / memory.read(valueOfRegister);
+    }
+    if (addressing_mode_.get_mode() == DIRECT) {
+      if (valueOfRegister == 0) {
+        throw "Error. Division by 0";
+      }
+      result_add = memory.read() / valueOfRegister;
+    }
+    memory.write(result_add);
+    programCounter.next_address();
   }
 };
 

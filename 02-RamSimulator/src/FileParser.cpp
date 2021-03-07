@@ -1,7 +1,9 @@
 #include "FileParser.hpp"
 
 #include "Instructions/Add.hpp"
+#include "Instructions/Div.hpp"
 #include "Instructions/Halt.hpp"
+#include "Instructions/Jgtz.hpp"
 #include "Instructions/Jump.hpp"
 #include "Instructions/Jzero.hpp"
 #include "Instructions/Load.hpp"
@@ -54,14 +56,11 @@ void FileParser::analyzeFile() {
 }
 
 bool FileParser::isComments(std::string line) {
-  // Implementation of diogonals "//"
-  /*if (line.length() < 2) return false;
-  if (line[0] == '/' && line[1] == '/') {
-    return true;
-  }*/
-  // Implementation of hasthags "#"
   if (line.length() < 1) return false;
   if (line[0] == '#') {
+    return true;
+  }
+  if (line[0] == ';') {
     return true;
   }
 }
@@ -78,6 +77,8 @@ Instruction* FileParser::validateOperation(Instruction instruction) {
     return new Jump(name, mode, value);
   } else if (name == "JZERO" || name == "jzero") {
     return new Jzero(name, mode, value);
+  } else if (name == "JGTZ" || name == "jgtz") {
+    return new Jgtz(name, mode, value);
   } else if (name == "WRITE" || name == "write") {
     return new Write(name, mode, value);
   } else if (name == "HALT" || name == "halt") {
@@ -90,6 +91,8 @@ Instruction* FileParser::validateOperation(Instruction instruction) {
     return new Add(name, mode, value);
   } else if (name == "MULT" || name == "mult") {
     return new Mult(name, mode, value);
+  } else if (name == "DIV" || name == "div") {
+    return new Div(name, mode, value);
   }
 
   throw "Instruction Error. This Instruction Not Valid";

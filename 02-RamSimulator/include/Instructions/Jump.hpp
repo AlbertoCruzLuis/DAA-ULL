@@ -36,12 +36,11 @@ class Jump : public Instruction {
     // std::cout << "Execute JUMP" << std::endl;
     if ((addressing_mode_.get_mode() == INMEDIATE) ||
         (addressing_mode_.get_mode() == INDIRECT)) {
-      // Error Addressing Deneged
+      throw "Error Addressing Mode. Addressing Mode for Jump not Allowed";
     }
     // Indirect mode working only when the register what pointed is valid
     if (addressing_mode_.get_mode() == DIRECT) {
       // Browse the Label what pointed Instruction in listLabel
-
       int positionToJump = listLabel[value_];
       programCounter.set_address(positionToJump);
     }

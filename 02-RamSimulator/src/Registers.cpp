@@ -1,7 +1,8 @@
 #include "Registers.hpp"
 
 int Registers::operator[](int id) {
-  std::cout << "ValueRegister: " << register_bank_[id] << std::endl;
+  std::cout << "ValueRegister[" << id << "]: " << register_bank_[id]
+            << std::endl;
 
   return register_bank_[id];
 }

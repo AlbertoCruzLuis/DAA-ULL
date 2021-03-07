@@ -31,6 +31,20 @@ class Jgtz : public Instruction {
   bool execute(Memory& memory, ProgramCounter& programCounter, InTape& inTape,
                OutTape& outTape, Labels listLabel) {
     std::cout << "Execute JGTZ" << std::endl;
+    if ((addressing_mode_.get_mode() == INMEDIATE) ||
+        (addressing_mode_.get_mode() == INDIRECT)) {
+      throw "Error Addressing Mode. Addressing Mode for Jzero not Allowed";
+    }
+    if (addressing_mode_.get_mode() == DIRECT) {
+      int value_accumalator = memory.read();
+      if (value_accumalator > 0) {
+        // Jump to line of instruction what pointed label
+        int positionToJump = listLabel[value_];
+        programCounter.set_address(positionToJump);
+      } else {
+        programCounter.next_address();
+      }
+    }
   }
 };
 #endif  // JGTZ_H
