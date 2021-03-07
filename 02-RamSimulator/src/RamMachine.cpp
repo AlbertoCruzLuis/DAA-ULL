@@ -11,7 +11,13 @@ void RamMachine::startMachine(std::string ram_program, std::string in_tape,
 
 void RamMachine::showRegisterOfMemory() { std::cout << memory_ << std::endl; }
 
-void RamMachine::desensamblador() {}
+void RamMachine::disassembler() {
+  for (auto &&instruction :
+       control_unit_.get_program().get_list_instructions()) {
+    std::cout << instruction->get_name() << " " << instruction->get_mode()
+              << instruction->get_value() << "\n";
+  }
+}
 
 void RamMachine::execute(bool mode_trace) {
   reset();

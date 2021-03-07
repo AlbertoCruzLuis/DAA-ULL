@@ -34,7 +34,7 @@ class RamMachine {
   void startMachine(std::string ram_program, std::string in_tape,
                     std::string out_tape);
   void showRegisterOfMemory();
-  void desensamblador();  // Convert code to machine code
+  void disassembler();  // Return name de each instruction
   void execute(bool mode_trace = 0);
   void showInputTape();
   void showOutputTape();

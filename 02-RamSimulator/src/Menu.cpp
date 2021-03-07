@@ -21,7 +21,7 @@ Menu::Menu(RamMachine ramMachine) {
         ramMachine.execute();
         break;
       case 's':
-        ramMachine.desensamblador();
+        ramMachine.disassembler();
         break;
       case 'i':
         ramMachine.showInputTape();

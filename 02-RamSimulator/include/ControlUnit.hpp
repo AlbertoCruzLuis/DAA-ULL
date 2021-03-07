@@ -33,6 +33,7 @@ class ControlUnit {
   ControlUnit();
   ~ControlUnit() {}
 
+  Program get_program();
   void loadProgram(std::string program_name);
   void executeProgram(bool state_machine, Memory& memory, InTape& inTape,
                       OutTape& outTape, bool mode_trace);

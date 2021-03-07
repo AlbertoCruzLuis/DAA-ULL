@@ -2,6 +2,8 @@
 
 ControlUnit::ControlUnit() {}
 
+Program ControlUnit::get_program() { return program_; }
+
 void ControlUnit::loadProgram(std::string program_name) {
   program_ = Program(program_name);
 }
