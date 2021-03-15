@@ -27,6 +27,7 @@ int main(int argc, char* argv[]) {
     std::string array_in_format_string = cmd_line.get_list_arguments()[1];
     std::stringstream string_to_parser(array_in_format_string);
 
+    // Fill vector with elements pass by arguments
     char bracketsAndCommas;
     int number;
     string_to_parser >> bracketsAndCommas;
