@@ -2,6 +2,11 @@
 
 #include <cmath>
 
+Monomial::Monomial() {
+  coefficient_ = 0;
+  exponent_ = 0;
+}
+
 Monomial::Monomial(int coefficient, int exponent)
     : coefficient_(coefficient), exponent_(exponent) {}
 
@@ -35,7 +40,7 @@ std::ostream& operator<<(std::ostream& os, const Monomial& monomial) {
   return os;
 }
 
-Monomial operator+(const Monomial& monomial_x, const Monomial& monomial_y) {
+Monomial operator+(Monomial& monomial_x, Monomial& monomial_y) {
   if (monomial_x.exponent_ == monomial_y.exponent_) {
     int add_of_coefficients = monomial_x.coefficient_ + monomial_y.coefficient_;
     Monomial new_monomial(add_of_coefficients, monomial_x.exponent_);
@@ -43,7 +48,7 @@ Monomial operator+(const Monomial& monomial_x, const Monomial& monomial_y) {
   }
 }
 
-Monomial operator-(const Monomial& monomial_x, const Monomial& monomial_y) {
+Monomial operator-(Monomial& monomial_x, Monomial& monomial_y) {
   if (monomial_x.exponent_ == monomial_y.exponent_) {
     int sub_of_coefficients = monomial_x.coefficient_ - monomial_y.coefficient_;
     Monomial new_monomial(sub_of_coefficients, monomial_x.exponent_);
@@ -51,9 +56,8 @@ Monomial operator-(const Monomial& monomial_x, const Monomial& monomial_y) {
   }
 }
 
-Monomial operator*(const Monomial& monomial_x, const Monomial& monomial_y) {
+Monomial operator*(Monomial& monomial_x, Monomial& monomial_y) {
   int add_of_exponents = monomial_x.exponent_ + monomial_y.exponent_;
-  monomial_x.coefficient_* monomial_y.coefficient_;
   int multiply_of_coefficients =
       monomial_x.coefficient_ * monomial_y.coefficient_;
 

@@ -9,18 +9,14 @@
 || @Info: https://en.wikipedia.org/wiki/Polynomial_arithmetic
 =======================================================================*/
 
-#ifndef TIMER_H
-#define TIMER_H
-
-#include <chrono>
-#include <functional>
 #include <iostream>
+#include <vector>
 
-void timer(std::function<void()> func) {
-  auto start = std::chrono::system_clock::now();
-  func();
-  auto end = std::chrono::system_clock::now();
-  std::chrono::duration<float, std::milli> duration = end - start;
-  std::cout << duration.count() << " ms\n";
+std::vector<int> random_polynomials(int case_size) {
+  srand(time(NULL));
+  std::vector<int> random_coefficients;
+  for (size_t i = 0; i < case_size; i++) {
+    random_coefficients.push_back(((rand() % 10) + 1));
+  }
+  return random_coefficients;
 }
-#endif  // TIMER_H

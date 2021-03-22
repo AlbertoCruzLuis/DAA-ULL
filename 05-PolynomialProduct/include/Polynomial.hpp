@@ -27,11 +27,22 @@ class Polynomial {
  public:
   Polynomial();
   Polynomial(std::vector<int> coefficients);
+  Polynomial(std::vector<Monomial> monomials);
   ~Polynomial() {}
 
-  int get_degree();
-  std::vector<Monomial> get_terms();
+  int get_degree() const;
+  std::vector<Monomial> get_terms() const;
+  int get_terms_size() const;
   void add_term(Monomial monomial);
+
+  friend Polynomial operator+(Polynomial& polynomial_x,
+                              Polynomial& polynomial_y);
+
+  friend Polynomial operator-(Polynomial& polynomial_x,
+                              Polynomial& polynomial_y);
+
+  friend Polynomial operator*(Polynomial& polynomial_x,
+                              Polynomial& polynomial_y);
 
   friend std::ostream& operator<<(std::ostream& os,
                                   const Polynomial& polynomial);

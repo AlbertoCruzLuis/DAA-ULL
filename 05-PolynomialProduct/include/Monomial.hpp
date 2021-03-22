@@ -20,7 +20,7 @@ class Monomial {
   int exponent_;
 
  public:
-  Monomial() {}
+  Monomial();
   Monomial(int coefficient, int exponent);
   ~Monomial() {}
 
@@ -30,14 +30,11 @@ class Monomial {
   void set_exponent(int value);
   int evaluate(int value_of_x) const;
 
-  friend Monomial operator+(const Monomial& monomial_x,
-                            const Monomial& monomial_y);
+  friend Monomial operator+(Monomial& monomial_x, Monomial& monomial_y);
 
-  friend Monomial operator-(const Monomial& monomial_x,
-                            const Monomial& monomial_y);
+  friend Monomial operator-(Monomial& monomial_x, Monomial& monomial_y);
 
-  friend Monomial operator*(const Monomial& monomial_x,
-                            const Monomial& monomial_y);
+  friend Monomial operator*(Monomial& monomial_x, Monomial& monomial_y);
 
   friend std::ostream& operator<<(std::ostream& os, const Monomial& monomial);
   friend std::istream& operator>>(std::istream& is, const Monomial& monomial);

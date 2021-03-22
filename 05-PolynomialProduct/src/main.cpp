@@ -14,17 +14,32 @@
 #include "Algorithm.hpp"
 #include "Polynomial.hpp"
 #include "Product.hpp"
+#include "RandomPolynomials/random_polynomials.cpp"
 #include "Timer/timer.cpp"
 
 int main(int argc, char const *argv[]) {
-  // Build Two Polynomial
-  Polynomial first_polynomial({5, 2});
-  std::cout << first_polynomial << std::endl;
-  Polynomial second_polynomial({1, 8});
-  std::cout << second_polynomial << std::endl;
+  try {
+    // Build Two Polynomial
+    int case_size = 300;
 
-  timer([first_polynomial, second_polynomial]() {
-    Product *product = new Product(new Classic());
-    std::cout << product->ProductInterface(first_polynomial, second_polynomial);
-  });
+    Polynomial first_polynomial(random_polynomials(case_size));
+    std::cout << "1.Polinomio- " << first_polynomial << std::endl;
+    Polynomial second_polynomial(random_polynomials(case_size));
+    std::cout << "2.Polinomio- " << second_polynomial << std::endl;
+
+    timer([first_polynomial, second_polynomial]() {
+      Product *product = new Product(new Classic());
+      product->ProductInterface(first_polynomial, second_polynomial);
+    });
+
+    timer([first_polynomial, second_polynomial]() {
+      Product *product2 = new Product(new DivideConquer());
+      product2->ProductInterface(first_polynomial, second_polynomial);
+    });
+  } catch (const std::exception &e) {
+    std::cerr << e.what() << '\n';
+  } catch (const char *e) {
+    std::cerr << e << '\n';
+  } catch (...) {
+  }
 }
