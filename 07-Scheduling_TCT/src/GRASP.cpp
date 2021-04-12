@@ -1,3 +1,5 @@
 #include "GRASP.hpp"
 
-void GRASP::execute() { std::cout << "GRASP execute" << std::endl; }
+Solution GRASP::execute(Graph &graph) {
+  std::cout << "GRASP execute" << std::endl;
+}

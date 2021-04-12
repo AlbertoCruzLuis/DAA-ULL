@@ -7,6 +7,7 @@
 
 class Greedy : public Algorithm {
  public:
-  void execute();
+  Solution execute(Graph &graph);
+  int find_machine_min_tct(Solution solution);
 };
 #endif  // GREEDY_H

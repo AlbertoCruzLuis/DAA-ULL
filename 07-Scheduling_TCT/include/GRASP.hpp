@@ -7,6 +7,6 @@
 
 class GRASP : public Algorithm {
  public:
-  void execute();
+  Solution execute(Graph &graph);
 };
 #endif  // GRASP_H

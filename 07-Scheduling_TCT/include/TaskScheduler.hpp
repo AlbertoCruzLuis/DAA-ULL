@@ -25,6 +25,6 @@ class TaskScheduler {
   TaskScheduler(Algorithm* algorithm) { algorithm_ = algorithm; }
   ~TaskScheduler() {}
 
-  void run() { algorithm_->execute(); }
+  void run(Graph& graph) { algorithm_->execute(graph); }
 };
 #endif  // TASKSCHEDULER_H
