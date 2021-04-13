@@ -16,6 +16,8 @@
 #include <iostream>
 #include <vector>
 
+#include "Task.hpp"
+
 class Graph {
  private:
   std::vector<int> processing_times_;
@@ -24,7 +26,7 @@ class Graph {
   int machines_number_;
   std::fstream file_;
 
-  std::vector<std::vector<std::pair<int, int>>> values_of_arcs_;
+  std::vector<std::vector<Task>> values_of_arcs_;
 
  public:
   Graph(std::string file_name);
@@ -32,7 +34,7 @@ class Graph {
 
   int get_tasks_number();
   int get_machines_number();
-  std::vector<std::vector<std::pair<int, int>>> get_values_of_arcs();
+  std::vector<std::vector<Task>> get_values_of_arcs();
 
   void analyze_file();
   void parse_tasks();
@@ -41,9 +43,10 @@ class Graph {
   void parse_setup_times();
 
   void calculate_values_of_arcs();
-  std::vector<std::pair<int, int>> min_values_of_arcs();
-  std::pair<int, int> min_element_of_row(
-      std::vector<std::pair<int, int>> proccessed_task,
-      int index_last_proccessed_task);
+  std::vector<Task> min_values_of_arcs();
+  std::vector<Task> unprocessed_tasks(std::vector<Task> proccessed_task,
+                                      int index_last_proccessed_task);
+  Task min_element_of_row(std::vector<Task> proccessed_task,
+                          int index_last_proccessed_task);
 };
 #endif  // GRAPH_H

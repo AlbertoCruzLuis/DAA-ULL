@@ -6,8 +6,19 @@ Solution::Solution(int machine_numbers) {
 
 std::vector<Machine> Solution::get_list_machines() { return list_machines_; }
 
-void Solution::add_task(std::pair<int, int> task, int machine) {
+void Solution::add_task(Task task, int machine) {
   list_machines_[machine].add_task(task);
+}
+
+int Solution::get_index_last_proccessed_task(int current_machine) {
+  if (list_machines_[current_machine].get_processed_tasks().size() == 0) {
+    return 0;
+  }
+
+  return list_machines_[current_machine]
+      .get_processed_tasks()
+          [list_machines_[current_machine].get_processed_tasks().size() - 1]
+      .get_id_task();
 }
 
 int Solution::assigned_tasks() {
@@ -26,22 +37,23 @@ int Solution::calculate_objetive_function() const {
   return objetive_function;
 }
 
-std::pair<int, int> Solution::find_task_to_add(Graph& graph,
-                                               int current_machine) {
-  std::vector<std::pair<int, int>> all_proccessed_tasks;
+Task Solution::find_task_to_add(Graph& graph, int current_machine) {
+  std::vector<Task> list_all_proccessed_tasks = all_proccessed_tasks();
+  int index_last_proccessed_task =
+      get_index_last_proccessed_task(current_machine);
+
+  return graph.min_element_of_row(list_all_proccessed_tasks,
+                                  index_last_proccessed_task);
+}
+
+std::vector<Task> Solution::all_proccessed_tasks() {
+  std::vector<Task> all_proccessed_tasks;
   for (auto&& machine : list_machines_) {
     for (auto&& task : machine.get_processed_tasks()) {
       all_proccessed_tasks.push_back(task);
     }
   }
-  int index_last_proccessed_task =
-      list_machines_[current_machine]
-          .get_processed_tasks()
-              [list_machines_[current_machine].get_processed_tasks().size() - 1]
-          .first;
-
-  return graph.min_element_of_row(all_proccessed_tasks,
-                                  index_last_proccessed_task);
+  return all_proccessed_tasks;
 }
 
 std::ostream& operator<<(std::ostream& os, const Solution& solution) {

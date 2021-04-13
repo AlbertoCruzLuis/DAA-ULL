@@ -5,18 +5,19 @@
 #include <vector>
 
 #include "Graph.hpp"
+#include "Task.hpp"
 
 class Machine {
  private:
-  std::vector<std::pair<int, int>> processed_tasks_;
+  std::vector<Task> processed_tasks_;
   int tct_;  // total completion time
 
  public:
   Machine(/* args */) {}
   ~Machine() {}
 
-  std::vector<std::pair<int, int>> get_processed_tasks();
-  void add_task(std::pair<int, int> task);
+  std::vector<Task> get_processed_tasks();
+  void add_task(Task task);
   int assigned_tasks();
   int calculate_tct() const;
 

@@ -8,7 +8,7 @@ Graph::Graph(std::string file_name) {
 
   analyze_file();
   values_of_arcs_.resize(tasks_number_ + 1,
-                         std::vector<std::pair<int, int>>(tasks_number_ + 1));
+                         std::vector<Task>(tasks_number_ + 1));
   calculate_values_of_arcs();
 }
 
@@ -16,7 +16,7 @@ int Graph::get_tasks_number() { return tasks_number_; }
 
 int Graph::get_machines_number() { return machines_number_; }
 
-std::vector<std::vector<std::pair<int, int>>> Graph::get_values_of_arcs() {
+std::vector<std::vector<Task>> Graph::get_values_of_arcs() {
   return values_of_arcs_;
 }
 
@@ -79,50 +79,57 @@ void Graph::calculate_values_of_arcs() {
   for (size_t i = 0; i < setup_times_.size(); i++) {
     for (size_t j = 0; j < processing_times_.size(); j++) {
       values_of_arcs_[i][j] =
-          std::make_pair(j, setup_times_[i][j] + processing_times_[j]);
+          Task(j, setup_times_[i][j] + processing_times_[j]);
     }
   }
 }
 
-std::vector<std::pair<int, int>> Graph::min_values_of_arcs() {
-  std::vector<std::pair<int, int>> temp_values_of_arcs = values_of_arcs_[0];
+std::vector<Task> Graph::min_values_of_arcs() {
+  std::vector<Task> temp_values_of_arcs = values_of_arcs_[0];
 
-  std::sort(
-      temp_values_of_arcs.begin(), temp_values_of_arcs.end(),
-      [](std::pair<int, int> before_value, std::pair<int, int> after_value) {
-        if (after_value.first != 0) {
-          return before_value.second < after_value.second;
-        } else {
-          return true;
-        }
-      });
-  std::vector<std::pair<int, int>> min_top_values;
+  std::sort(temp_values_of_arcs.begin(), temp_values_of_arcs.end(),
+            [](Task before_value, Task after_value) {
+              if (after_value.get_id_task() != 0) {
+                return before_value.get_value_of_arc() <
+                       after_value.get_value_of_arc();
+              } else {
+                return true;
+              }
+            });
+  std::vector<Task> min_top_values;
   for (size_t i = 0; i < machines_number_; i++) {
     min_top_values.push_back(temp_values_of_arcs[i]);
   }
   return min_top_values;
 }
 
-std::pair<int, int> Graph::min_element_of_row(
-    std::vector<std::pair<int, int>> proccessed_task,
-    int index_last_proccessed_task) {
-  std::vector<std::pair<int, int>> list_element_to_search;
+std::vector<Task> Graph::unprocessed_tasks(std::vector<Task> proccessed_task,
+                                           int index_last_proccessed_task) {
+  std::vector<Task> unprocessed_tasks;
 
   std::copy_if(values_of_arcs_[index_last_proccessed_task].begin(),
                values_of_arcs_[index_last_proccessed_task].end(),
-               std::back_inserter(list_element_to_search),
-               [proccessed_task](std::pair<int, int> task) {
+               std::back_inserter(unprocessed_tasks),
+               [proccessed_task](Task task) {
                  for (auto &&proccess_task : proccessed_task) {
-                   if (proccess_task.first == task.first || task.first == 0) {
+                   if (proccess_task.get_id_task() == task.get_id_task() ||
+                       task.get_id_task() == 0) {
                      return false;
                    }
                  }
                  return true;
                });
+  return unprocessed_tasks;
+}
+
+Task Graph::min_element_of_row(std::vector<Task> proccessed_task,
+                               int index_last_proccessed_task) {
+  std::vector<Task> list_element_to_search =
+      unprocessed_tasks(proccessed_task, index_last_proccessed_task);
 
   return *std::min_element(
       list_element_to_search.begin(), list_element_to_search.end(),
-      [](std::pair<int, int> before_task, std::pair<int, int> after_task) {
-        return before_task.second < after_task.second;
+      [](Task before_task, Task after_task) {
+        return before_task.get_value_of_arc() < after_task.get_value_of_arc();
       });
 }

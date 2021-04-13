@@ -1,12 +1,8 @@
 #include "Machine.hpp"
 
-void Machine::add_task(std::pair<int, int> task) {
-  processed_tasks_.push_back(task);
-}
+void Machine::add_task(Task task) { processed_tasks_.push_back(task); }
 
-std::vector<std::pair<int, int>> Machine::get_processed_tasks() {
-  return processed_tasks_;
-}
+std::vector<Task> Machine::get_processed_tasks() { return processed_tasks_; }
 
 int Machine::assigned_tasks() { return processed_tasks_.size(); }
 
@@ -15,7 +11,7 @@ int Machine::calculate_tct() const {
   for (size_t i = 1; i <= processed_tasks_.size(); i++) {
     int sum = 0;
     for (size_t j = 0; j < i; j++) {
-      sum += processed_tasks_[j].second;
+      sum += processed_tasks_[j].get_value_of_arc();
     }
     tct += sum;
   }
@@ -35,7 +31,7 @@ int Machine::calculate_tct() const {
 
 std::ostream& operator<<(std::ostream& os, const Machine& machine) {
   for (auto&& task : machine.processed_tasks_) {
-    os << task.first << " ";
+    os << task.get_id_task() << " ";
   }
   os << "TCT: " << machine.calculate_tct();
 

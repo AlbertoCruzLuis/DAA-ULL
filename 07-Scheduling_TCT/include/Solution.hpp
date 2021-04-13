@@ -6,6 +6,7 @@
 
 #include "Graph.hpp"
 #include "Machine.hpp"
+#include "Task.hpp"
 
 class Solution {
  private:
@@ -17,10 +18,12 @@ class Solution {
 
   std::vector<Machine> get_list_machines();
 
-  void add_task(std::pair<int, int> task, int machine);
+  void add_task(Task task, int machine);
+  int get_index_last_proccessed_task(int current_machine);
   int assigned_tasks();
   int calculate_objetive_function() const;
-  std::pair<int, int> find_task_to_add(Graph& graph, int currentMachine);
+  Task find_task_to_add(Graph& graph, int currentMachine);
+  std::vector<Task> all_proccessed_tasks();
 
   friend std::ostream& operator<<(std::ostream& os, const Solution& solution);
 };

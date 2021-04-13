@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "Algorithm.hpp"
+#include "Solution.hpp"
 
 class TaskScheduler {
  private:
@@ -25,6 +26,6 @@ class TaskScheduler {
   TaskScheduler(Algorithm* algorithm) { algorithm_ = algorithm; }
   ~TaskScheduler() {}
 
-  void run(Graph& graph) { algorithm_->execute(graph); }
+  Solution run(Graph& graph) { return algorithm_->execute(graph); }
 };
 #endif  // TASKSCHEDULER_H
