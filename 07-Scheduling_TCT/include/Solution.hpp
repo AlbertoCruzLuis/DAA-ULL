@@ -18,6 +18,7 @@ class Solution {
   ~Solution() {}
 
   std::vector<Machine> get_list_machines() const;
+  std::vector<Machine>& get_list_machines();
   void set_proccessed_tasks(int machine, std::vector<Task> proccessed_tasks);
 
   void add_task(Task task, int machine);

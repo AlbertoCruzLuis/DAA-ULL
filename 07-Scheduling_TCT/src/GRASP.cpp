@@ -4,7 +4,10 @@
 
 #include "LocalSearch.hpp"
 
-GRASP::GRASP(NeighbourAlgorithm *neighbour_algorithm) {
+GRASP::GRASP(NeighbourAlgorithm *neighbour_algorithm, int max_iterations,
+             int size_rcl) {
+  MAX_ITERATIONS_ = max_iterations;
+  SIZE_RCL = size_rcl;
   neighbour_algorithm_ = neighbour_algorithm;
 }
 

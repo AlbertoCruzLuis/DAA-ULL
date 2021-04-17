@@ -16,6 +16,7 @@ class Machine {
   ~Machine() {}
 
   std::vector<Task> get_processed_tasks() const;
+  std::vector<Task>& get_processed_tasks();
   void set_processed_task(std::vector<Task> processed_task);
   void add_task(Task task);
   void insert_task(int position, Task task);

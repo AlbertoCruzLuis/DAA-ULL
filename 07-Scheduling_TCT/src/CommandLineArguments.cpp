@@ -18,8 +18,9 @@
  * @param argv
  */
 CommandLineArguments::CommandLineArguments(int argc, char* argv[]) {
-  const char* const short_opts = "h";
+  const char* const short_opts = "ha:";
   const option long_opts[] = {{"help", no_argument, nullptr, 'h'},
+                              {"algorithm", required_argument, nullptr, 'a'},
                               {nullptr, no_argument, nullptr, 0}};
 
   bool is_option = false;
@@ -34,6 +35,12 @@ CommandLineArguments::CommandLineArguments(int argc, char* argv[]) {
       case 'h':
         usage();
         throw false;
+
+      case 'a': {
+        std::string name_algorithm = optarg;
+        set_name_algorithm(name_algorithm);
+        break;
+      }
 
       case '?':
         std::cerr << "Unknown command line argument\n";
@@ -65,6 +72,14 @@ std::vector<std::string> CommandLineArguments::get_list_arguments() {
   return list_arguments_;
 }
 
+std::string CommandLineArguments::get_name_algorithm() {
+  return name_algorithm_;
+}
+
+void CommandLineArguments::set_name_algorithm(std::string name_algorithm) {
+  name_algorithm_ = name_algorithm;
+}
+
 /**
  * @brief Usage Manual
  *
@@ -80,4 +95,6 @@ void CommandLineArguments::usage() {
 
   std::cerr << "OPTIONS\n";
   std::cerr << "\t[-h][--help]            Help manual\n";
+  std::cerr << "\t[-a][--algorithm]       Types of Algorithms: Greedy, GRASP, "
+               "MultiBoot\n";
 }

@@ -10,12 +10,13 @@
 
 class GRASP : public Algorithm {
  private:
-  const int MAX_ITERATIONS_ = 10;
-  const int SIZE_RCL = 3;
+  int MAX_ITERATIONS_ = 100;
+  int SIZE_RCL = 3;
   NeighbourAlgorithm *neighbour_algorithm_;
 
  public:
-  GRASP(NeighbourAlgorithm *neighbour_algorithm);
+  GRASP(NeighbourAlgorithm *neighbour_algorithm, int max_iterations = 100,
+        int size_rcl = 3);
   virtual ~GRASP();
   Solution execute(Graph &graph);
   Solution greedy_randomized_construction(Graph &graph);

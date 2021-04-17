@@ -21,12 +21,15 @@
 class CommandLineArguments {
  private:
   std::vector<std::string> list_arguments_;
+  std::string name_algorithm_;
 
  public:
   CommandLineArguments(int argc, char *argv[]);
   ~CommandLineArguments() {}
 
   std::vector<std::string> get_list_arguments();
+  std::string get_name_algorithm();
+  void set_name_algorithm(std::string name_algorithm);
 
   void usage();
 };
