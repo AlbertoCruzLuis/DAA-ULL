@@ -4,7 +4,14 @@ Solution::Solution(int machine_numbers) {
   list_machines_.resize(machine_numbers);
 }
 
-std::vector<Machine> Solution::get_list_machines() { return list_machines_; }
+std::vector<Machine> Solution::get_list_machines() const {
+  return list_machines_;
+}
+
+void Solution::set_proccessed_tasks(int machine,
+                                    std::vector<Task> proccessed_tasks) {
+  list_machines_[machine].set_processed_task(proccessed_tasks);
+}
 
 void Solution::add_task(Task task, int machine) {
   list_machines_[machine].add_task(task);

@@ -9,7 +9,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/scheduling_tct",
-      "args": ["examples/I40j_2m_S1_1.txt"],
+      "args": ["examples/prueba.txt"],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],

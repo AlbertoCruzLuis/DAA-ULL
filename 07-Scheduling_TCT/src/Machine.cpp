@@ -2,7 +2,21 @@
 
 void Machine::add_task(Task task) { processed_tasks_.push_back(task); }
 
-std::vector<Task> Machine::get_processed_tasks() { return processed_tasks_; }
+void Machine::insert_task(int position, Task task) {
+  processed_tasks_.insert(processed_tasks_.begin() + position, task);
+}
+
+void Machine::erase_task(int position) {
+  processed_tasks_.erase(processed_tasks_.begin() + position);
+}
+
+std::vector<Task> Machine::get_processed_tasks() const {
+  return processed_tasks_;
+}
+
+void Machine::set_processed_task(std::vector<Task> processed_task) {
+  processed_tasks_ = processed_task;
+}
 
 int Machine::assigned_tasks() { return processed_tasks_.size(); }
 

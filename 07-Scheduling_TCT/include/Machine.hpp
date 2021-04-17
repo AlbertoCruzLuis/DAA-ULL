@@ -10,14 +10,16 @@
 class Machine {
  private:
   std::vector<Task> processed_tasks_;
-  int tct_;  // total completion time
 
  public:
   Machine(/* args */) {}
   ~Machine() {}
 
-  std::vector<Task> get_processed_tasks();
+  std::vector<Task> get_processed_tasks() const;
+  void set_processed_task(std::vector<Task> processed_task);
   void add_task(Task task);
+  void insert_task(int position, Task task);
+  void erase_task(int position);
   int assigned_tasks();
   int calculate_tct() const;
 

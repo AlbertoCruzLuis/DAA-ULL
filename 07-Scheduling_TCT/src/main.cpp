@@ -12,9 +12,13 @@
 #include <iostream>
 
 #include "CommandLineArguments.hpp"
+#include "ExchangeExternalMachine.hpp"
 #include "GRASP.hpp"
 #include "Graph.hpp"
 #include "Greedy.hpp"
+#include "NeighbourAlgorithm.hpp"
+#include "ReinsertionExternalMachine.hpp"
+#include "ReinsertionOwnMachine.hpp"
 #include "TaskScheduler.hpp"
 
 int main(int argc, char* argv[]) {
@@ -35,7 +39,7 @@ int main(int argc, char* argv[]) {
       std::cout << "\n";
     }
 
-    TaskScheduler taskScheduler(new Greedy());
+    TaskScheduler taskScheduler(new GRASP(new ReinsertionExternalMachine()));
     std::cout << taskScheduler.run(graph) << "\n";
 
   } catch (const std::exception& e) {

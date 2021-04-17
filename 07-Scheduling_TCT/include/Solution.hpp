@@ -13,10 +13,12 @@ class Solution {
   std::vector<Machine> list_machines_;
 
  public:
+  Solution() {}
   Solution(int machine_numbers);
   ~Solution() {}
 
-  std::vector<Machine> get_list_machines();
+  std::vector<Machine> get_list_machines() const;
+  void set_proccessed_tasks(int machine, std::vector<Task> proccessed_tasks);
 
   void add_task(Task task, int machine);
   int get_index_last_proccessed_task(int current_machine);

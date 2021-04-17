@@ -78,8 +78,9 @@ void Graph::parse_setup_times() {
 void Graph::calculate_values_of_arcs() {
   for (size_t i = 0; i < setup_times_.size(); i++) {
     for (size_t j = 0; j < processing_times_.size(); j++) {
-      values_of_arcs_[i][j] =
-          Task(j, setup_times_[i][j] + processing_times_[j]);
+      values_of_arcs_[i][j].set_id_task(j);
+      values_of_arcs_[i][j].set_value_of_arc(setup_times_[i][j] +
+                                             processing_times_[j]);
     }
   }
 }
@@ -112,13 +113,16 @@ std::vector<Task> Graph::unprocessed_tasks(std::vector<Task> proccessed_task,
                std::back_inserter(unprocessed_tasks),
                [proccessed_task](Task task) {
                  for (auto &&proccess_task : proccessed_task) {
-                   if (proccess_task.get_id_task() == task.get_id_task() ||
-                       task.get_id_task() == 0) {
+                   if (proccess_task.get_id_task() == task.get_id_task()) {
                      return false;
                    }
                  }
+                 if (task.get_id_task() == 0) {
+                   return false;
+                 }
                  return true;
                });
+
   return unprocessed_tasks;
 }
 

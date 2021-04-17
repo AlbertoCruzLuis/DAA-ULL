@@ -2,15 +2,29 @@
 
 #include <algorithm>
 
+#include "LocalSearch.hpp"
+
+GRASP::GRASP(NeighbourAlgorithm *neighbour_algorithm) {
+  neighbour_algorithm_ = neighbour_algorithm;
+}
+
+GRASP::~GRASP() { delete neighbour_algorithm_; }
+
 Solution GRASP::execute(Graph &graph) {
   std::cout << "GRASP execute" << std::endl;
   Solution solution(graph.get_machines_number());
+  LocalSearch local_search(neighbour_algorithm_);
+  Solution best_solution = greedy_randomized_construction(graph);
+  srand(time(NULL));
   for (size_t i = 0; i < MAX_ITERATIONS_; i++) {
     solution = greedy_randomized_construction(graph);
-    // Solution ← Local Search(Solution)
-    // Update Solution(Solution,Best Solution)
+    solution = local_search.run(solution);
+    if (solution.calculate_objetive_function() <
+        best_solution.calculate_objetive_function()) {
+      best_solution = solution;
+    }
   }
-  return solution;
+  return best_solution;
 }
 
 Solution GRASP::greedy_randomized_construction(Graph &graph) {
@@ -19,7 +33,8 @@ Solution GRASP::greedy_randomized_construction(Graph &graph) {
   int current_machine = 0;
   while (solution.assigned_tasks() < graph.get_tasks_number()) {
     // Build the restricted candidate list (RCL)
-    std::vector<Task> rcl = build_RCL(graph, solution, current_machine);
+    std::vector<Task> rcl =
+        build_RCL(graph, solution, current_machine, SIZE_RCL);
     // Select an element s from the RCL at random
     Task candidate = select_random_candidate(rcl);
     // Solution ← Solution ∪ {s}
@@ -30,13 +45,24 @@ Solution GRASP::greedy_randomized_construction(Graph &graph) {
   return solution;
 }
 
-std::vector<Task> GRASP::build_RCL(Graph &graph, Solution solution,
-                                   int current_machine) {
+std::vector<Task> GRASP::build_RCL(Graph &graph, Solution &solution,
+                                   int current_machine, int size_rcl) {
   std::vector<Task> rcl = graph.unprocessed_tasks(
       solution.all_proccessed_tasks(),
       solution.get_index_last_proccessed_task(current_machine));
 
-  return rcl;
+  int real_size_rcl = rcl.size() < size_rcl ? rcl.size() : size_rcl;
+  std::nth_element(rcl.begin(), rcl.begin() + real_size_rcl, rcl.end(),
+                   [](Task before_task, Task after_task) {
+                     return before_task.get_value_of_arc() <
+                            after_task.get_value_of_arc();
+                   });
+
+  std::vector<Task> rclTopThree;
+  std::copy(rcl.begin(), rcl.begin() + real_size_rcl,
+            std::back_inserter(rclTopThree));
+
+  return rclTopThree;
 }
 
 Task GRASP::select_random_candidate(std::vector<Task> rcl) {
