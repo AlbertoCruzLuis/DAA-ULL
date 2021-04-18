@@ -1,4 +1,7 @@
 #include "Experiment.hpp"
+
+#include "Timer/timer.cpp"
+
 Experiment::Experiment(Graph& graph, std::string type_algorithm,
                        std::string neighbour_algorithm, int max_iterations,
                        int rcl_size)
@@ -6,7 +9,7 @@ Experiment::Experiment(Graph& graph, std::string type_algorithm,
       neighbour_algorithm_(neighbour_algorithm),
       max_iterations_(max_iterations),
       rcl_size_(rcl_size) {
-  int i = 0;
+  /*int i = 0;
   for (auto&& row : graph.get_values_of_arcs()) {
     std::cout << i << ": ";
     for (auto&& value : row) {
@@ -14,12 +17,13 @@ Experiment::Experiment(Graph& graph, std::string type_algorithm,
     }
     i++;
     std::cout << "\n";
-  }
+  }*/
 
   Algorithm* algorithm = choose_algorithm(type_algorithm, neighbour_algorithm);
-
-  TaskScheduler taskScheduler(algorithm);
-  std::cout << taskScheduler.run(graph) << "\n";
+  timer([algorithm, &graph]() {
+    TaskScheduler taskScheduler(algorithm);
+    std::cout << taskScheduler.run(graph) << "\n";
+  });
 }
 
 Algorithm* Experiment::choose_algorithm(std::string type_algorithm,

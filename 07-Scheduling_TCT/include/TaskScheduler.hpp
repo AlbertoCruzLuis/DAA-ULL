@@ -15,7 +15,7 @@
 #include <iostream>
 #include <vector>
 
-#include "Algorithm.hpp"
+#include "Algorithms/Algorithm.hpp"
 #include "Solution.hpp"
 
 class TaskScheduler {

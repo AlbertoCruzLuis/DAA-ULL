@@ -27,11 +27,6 @@ class ExchangeOwnMachine : public NeighbourAlgorithm {
         (index_solution_ + 1) % solution.get_list_machines().size();
     check_is_permutation(solution, index_solution_);
 
-    /*std::sort(processed_task[index_solution_].begin(),
-              processed_task[index_solution_].end(),
-              [](Task const& first, Task const& second) {
-                return first.get_value_of_arc() < second.get_value_of_arc();
-              });*/
     std::next_permutation(
         processed_task[index_solution_].begin(),
         processed_task[index_solution_].end(), [](Task first, Task second) {

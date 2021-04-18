@@ -1,7 +1,7 @@
 #ifndef REINSERTIONEXTERNALMACHINE_H
 #define REINSERTIONEXTERNALMACHINE_H
 
-#include "NeighbourAlgorithm.hpp"
+#include "NeighbourAlgorithms/NeighbourAlgorithm.hpp"
 
 class ReinsertionExternalMachine : public NeighbourAlgorithm {
   int index_machine_one = 0;

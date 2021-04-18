@@ -1,7 +1,7 @@
 #ifndef EXCHANGEEXTERNALMACHINE_H
 #define EXCHANGEEXTERNALMACHINE_H
 
-#include "NeighbourAlgorithm.hpp"
+#include "NeighbourAlgorithms/NeighbourAlgorithm.hpp"
 
 class ExchangeExternalMachine : public NeighbourAlgorithm {
   int index_machine_one = 0;

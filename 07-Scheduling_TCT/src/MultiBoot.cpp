@@ -1,4 +1,4 @@
-#include "MultiBoot.hpp"
+#include "Algorithms/MultiBoot.hpp"
 
 #include "LocalSearch.hpp"
 
@@ -11,7 +11,7 @@ MultiBoot::MultiBoot(NeighbourAlgorithm *neighbour_algorithm,
 MultiBoot::~MultiBoot() { delete neighbour_algorithm_; }
 
 Solution MultiBoot::execute(Graph &graph) {
-  std::cout << "MultiBoot execute" << std::endl;
+  std::cout << "\nMultiBoot execute" << std::endl;
   LocalSearch local_search(neighbour_algorithm_);
   Solution solution = generate_boot_solution(graph);
   Solution best_solution = solution;

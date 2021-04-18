@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "Algorithm.hpp"
-#include "NeighbourAlgorithm.hpp"
+#include "NeighbourAlgorithms/NeighbourAlgorithm.hpp"
 #include "Task.hpp"
 
 class GRASP : public Algorithm {

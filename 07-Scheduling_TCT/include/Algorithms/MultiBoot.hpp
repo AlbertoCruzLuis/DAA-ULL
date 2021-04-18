@@ -2,7 +2,7 @@
 #define MULTIBOOT_H
 
 #include "Algorithm.hpp"
-#include "NeighbourAlgorithm.hpp"
+#include "NeighbourAlgorithms/NeighbourAlgorithm.hpp"
 
 class MultiBoot : public Algorithm {
  private:

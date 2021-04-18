@@ -66,8 +66,10 @@ std::vector<Task> Solution::all_proccessed_tasks() {
 }
 
 std::ostream& operator<<(std::ostream& os, const Solution& solution) {
+  int index_machine = 0;
   for (auto&& machine : solution.list_machines_) {
-    os << machine << "\n";
+    os << "M[" << index_machine << "]: " << machine << "\n";
+    index_machine++;
   }
   os << "Objetive Function: " << solution.calculate_objetive_function();
 

@@ -1,14 +1,14 @@
-#include "Greedy.hpp"
+#include "Algorithms/Greedy.hpp"
 
 #include <limits>
 
 Solution Greedy::execute(Graph &graph) {
-  // Min task values of t0j
+  std::cout << "\nGreedy execute" << std::endl;
   Solution solution(graph.get_machines_number());
   for (size_t i = 0; i < graph.get_machines_number(); i++) {
     solution.add_task(graph.min_values_of_arcs()[i], i);
   }
-  std::cout << "" << std::endl;
+
   int currentMachine = 0;
   do {
     // Obtener la tarea-maquina-posicion que minimiza el incremento del TCT

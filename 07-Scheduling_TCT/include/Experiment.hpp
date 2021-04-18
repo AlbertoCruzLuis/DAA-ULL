@@ -1,14 +1,14 @@
 #ifndef EXPERIMENT_H
 #define EXPERIMENT_H
 
-#include "ExchangeExternalMachine.hpp"
-#include "GRASP.hpp"
+#include "Algorithms/GRASP.hpp"
+#include "Algorithms/Greedy.hpp"
+#include "Algorithms/MultiBoot.hpp"
 #include "Graph.hpp"
-#include "Greedy.hpp"
-#include "MultiBoot.hpp"
-#include "NeighbourAlgorithm.hpp"
-#include "ReinsertionExternalMachine.hpp"
-#include "ReinsertionOwnMachine.hpp"
+#include "NeighbourAlgorithms/ExchangeExternalMachine.hpp"
+#include "NeighbourAlgorithms/NeighbourAlgorithm.hpp"
+#include "NeighbourAlgorithms/ReinsertionExternalMachine.hpp"
+#include "NeighbourAlgorithms/ReinsertionOwnMachine.hpp"
 #include "TaskScheduler.hpp"
 
 class Experiment {

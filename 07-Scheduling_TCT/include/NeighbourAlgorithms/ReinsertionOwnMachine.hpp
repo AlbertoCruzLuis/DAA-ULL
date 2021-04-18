@@ -1,7 +1,7 @@
 #ifndef REINSERTIONOWNMACHINE_H
 #define REINSERTIONOWNMACHINE_H
 
-#include "NeighbourAlgorithm.hpp"
+#include "NeighbourAlgorithms/NeighbourAlgorithm.hpp"
 
 class ReinsertionOwnMachine : public NeighbourAlgorithm {
   int index_one = 0;

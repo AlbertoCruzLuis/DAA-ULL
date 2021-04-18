@@ -1,4 +1,4 @@
-#include "GRASP.hpp"
+#include "Algorithms/GRASP.hpp"
 
 #include <algorithm>
 
@@ -14,7 +14,7 @@ GRASP::GRASP(NeighbourAlgorithm *neighbour_algorithm, int max_iterations,
 GRASP::~GRASP() { delete neighbour_algorithm_; }
 
 Solution GRASP::execute(Graph &graph) {
-  std::cout << "GRASP execute" << std::endl;
+  std::cout << "\nGRASP execute" << std::endl;
   Solution solution(graph.get_machines_number());
   LocalSearch local_search(neighbour_algorithm_);
   Solution best_solution = greedy_randomized_construction(graph);
