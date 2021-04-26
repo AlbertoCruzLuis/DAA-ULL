@@ -1,29 +1,21 @@
 #include "LocalSearch.hpp"
 
-LocalSearch::LocalSearch(NeighbourAlgorithm *neighbour_algorithm) {
+LocalSearch::LocalSearch(NeighbourAlgorithm* neighbour_algorithm) {
   neighbour_algorithm_ = neighbour_algorithm;
 }
 
-Solution LocalSearch::run(Solution solution) {
-  return stop_criterion(solution);
+Solution LocalSearch::run(Solution& solution) {
+  return optimal_search(solution);
 }
 
-Solution LocalSearch::optimal_search(Solution solution) {
-  Solution neighbour;
+Solution LocalSearch::optimal_search(Solution& solution) {
   neighbour_algorithm_->set_solution_to_swap(solution);
-  do {
-    neighbour = neighbour_algorithm_->execute(solution);
-    if (neighbour.calculate_objetive_function() <
-        solution.calculate_objetive_function()) {
-      solution = neighbour;
-    }
-  } while (neighbour.calculate_objetive_function() >
-           solution.calculate_objetive_function());
-  return solution;
+
+  return neighbour_algorithm_->execute(solution);
 }
 
-Solution LocalSearch::stop_criterion(Solution current_solution) {
-  int without_improvement = 0;
+Solution LocalSearch::stop_criterion(Solution& current_solution) {
+  /*int without_improvement = 0;
   Solution best_solution = current_solution;
 
   while (without_improvement < 3) {
@@ -37,5 +29,5 @@ Solution LocalSearch::stop_criterion(Solution current_solution) {
       without_improvement = 0;
     }
   }
-  return best_solution;
+  return best_solution;*/
 }

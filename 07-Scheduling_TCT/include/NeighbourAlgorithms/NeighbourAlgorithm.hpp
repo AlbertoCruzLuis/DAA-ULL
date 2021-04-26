@@ -12,7 +12,7 @@ class NeighbourAlgorithm {
   int index_solution_ = 0;
 
  public:
-  virtual Solution execute(Solution& solution) = 0;
+  virtual Solution execute(Solution solution) = 0;
   void set_solution_to_swap(Solution solution) {
     solution_to_swap = solution;
     for (auto&& machine : solution.get_list_machines()) {
@@ -22,7 +22,7 @@ class NeighbourAlgorithm {
 };
 
 class ExchangeOwnMachine : public NeighbourAlgorithm {
-  Solution execute(Solution& solution) {
+  Solution execute(Solution solution) {
     index_solution_ =
         (index_solution_ + 1) % solution.get_list_machines().size();
     check_is_permutation(solution, index_solution_);

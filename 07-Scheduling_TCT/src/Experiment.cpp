@@ -4,11 +4,12 @@
 
 Experiment::Experiment(Graph& graph, std::string type_algorithm,
                        std::string neighbour_algorithm, int max_iterations,
-                       int rcl_size)
+                       int rcl_size, int value_environmental_structure)
     : type_algorithm_(type_algorithm),
       neighbour_algorithm_(neighbour_algorithm),
       max_iterations_(max_iterations),
-      rcl_size_(rcl_size) {
+      rcl_size_(rcl_size),
+      value_environmental_structure_(value_environmental_structure) {
   /*int i = 0;
   for (auto&& row : graph.get_values_of_arcs()) {
     std::cout << i << ": ";
@@ -39,6 +40,10 @@ Algorithm* Experiment::choose_algorithm(std::string type_algorithm,
     return new MultiBoot(choose_neighbour_algorithm(neighbour_algorithm),
                          max_iterations_);
   }
+  if (type_algorithm == "gvns") {
+    return new GVNS(value_environmental_structure_, max_iterations_);
+  }
+
   return new Greedy();
 }
 
@@ -56,4 +61,5 @@ NeighbourAlgorithm* Experiment::choose_neighbour_algorithm(
   if (type_algorithm == "ReinsertionExternalMachine") {
     return new ReinsertionExternalMachine();
   }
+  return new ExchangeExternalMachine();
 }

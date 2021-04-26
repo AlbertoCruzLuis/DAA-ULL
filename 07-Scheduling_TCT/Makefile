@@ -4,7 +4,7 @@ INCLUDE := include
 EXECUTABLE  := scheduling_tct
 
 CXX       := g++
-CXX_FLAGS := -I$(INCLUDE) -g
+CXX_FLAGS := -I$(INCLUDE) -g -O2
 
 .PHONY: $(BIN)/$(EXECUTABLE)
 

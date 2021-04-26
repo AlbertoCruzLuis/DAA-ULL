@@ -2,6 +2,7 @@
 #define EXPERIMENT_H
 
 #include "Algorithms/GRASP.hpp"
+#include "Algorithms/GVNS.hpp"
 #include "Algorithms/Greedy.hpp"
 #include "Algorithms/MultiBoot.hpp"
 #include "Graph.hpp"
@@ -17,11 +18,13 @@ class Experiment {
   std::string neighbour_algorithm_;
   int max_iterations_;
   int rcl_size_;
+  int value_environmental_structure_;
 
  public:
   Experiment(Graph& graph, std::string type_algorithm = "greedy",
              std::string neighbour_algorithm = "ReinsertionOwnMachine",
-             int max_iterations = 100, int rcl_size = 3);
+             int max_iterations = 100, int rcl_size = 3,
+             int value_environmental_structure = 5);
   ~Experiment() {}
 
   Algorithm* choose_algorithm(std::string type_algorithm,

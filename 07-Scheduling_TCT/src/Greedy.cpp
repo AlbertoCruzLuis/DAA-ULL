@@ -11,13 +11,11 @@ Solution Greedy::execute(Graph &graph) {
 
   int currentMachine = 0;
   do {
-    // Obtener la tarea-maquina-posicion que minimiza el incremento del TCT
     Task task = solution.find_task_to_add(graph, currentMachine);
 
     solution.add_task(task, currentMachine);
     currentMachine = find_machine_min_tct(solution);
 
-    // Insertarla en la posicion que corresponda y actualizar S*
   } while (solution.assigned_tasks() < graph.get_tasks_number());
 
   return solution;

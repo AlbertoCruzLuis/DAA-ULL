@@ -22,8 +22,10 @@ int main(int argc, char* argv[]) {
     std::string file_name = cmd_line.get_list_arguments()[1];
     Graph graph(file_name);
 
-    Experiment experiment(graph);
-    Experiment experimentOne(graph, "grasp", "ReinsertionExternalMachine");
+    // Experiment experiment(graph);
+    // Experiment experimentOne(graph, "grasp", "ReinsertionExternalMachine",
+    // 100, 3);
+    Experiment experimentTwo(graph, "gvns");
 
   } catch (const std::exception& e) {
     std::cerr << e.what() << '\n';
