@@ -11,10 +11,11 @@
 
 #include <iostream>
 
-#include "Algorithms/Greedy.hpp"
 #include "CommandLineArguments.hpp"
+#include "Experiment.hpp"
+#include "LocalSearch.hpp"
+#include "NeighbourAlgorithms/ExchangeExternalPoint.hpp"
 #include "Problem.hpp"
-#include "Strategy.hpp"
 
 int main(int argc, char* argv[]) {
   try {
@@ -23,10 +24,16 @@ int main(int argc, char* argv[]) {
     std::string file_name = cmd_line.get_list_arguments()[1];
     Problem maximum_diversity(file_name);
 
-    int size_solution = 5;
+    std::vector<int> size_solutions = {2, 3, 4, 5};
+    Experiment experiment(maximum_diversity, "greedy");
+    std::cout << experiment << std::endl;
+    for (auto&& size_solution : size_solutions) {
+      experiment.greedy(size_solution);
+      experiment.show_table(std::cout);
+    }
 
-    Strategy strategy(new Greedy(size_solution));
-    std::cout << strategy.run(maximum_diversity);
+    LocalSearch local_search(new ExchangeExternalPoint());
+    std::cout << local_search.execute(experiment.get_solution());
 
   } catch (const std::exception& e) {
     std::cerr << e.what() << '\n';

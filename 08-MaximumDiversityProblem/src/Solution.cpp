@@ -4,6 +4,8 @@
 
 std::vector<Point> Solution::get_list_points() const { return list_points_; }
 
+std::vector<Point>& Solution::get_list_points() { return list_points_; }
+
 void Solution::add_point(Point point) { list_points_.push_back(point); }
 
 float Solution::calculate_objetive_function() const {
@@ -18,21 +20,6 @@ float Solution::calculate_objetive_function() const {
   return objetive_function;
 }
 
-Point Solution::calculate_center(std::vector<Point> points) const {
-  Point center;
-  int dimension_size = points[0].get_coordinates().size();
-
-  for (int j = 0; j < dimension_size; j++) {
-    float sum = 0;
-    for (int i = 0; i < points.size(); i++) {
-      sum += points[i].get_coordinates()[j];
-    }
-    float coordinate = sum / points.size();
-    center.add_coordinate(coordinate);
-  }
-  return center;
-}
-
 float Solution::calculate_euclidean_distance(Point first, Point second) const {
   float distance = 0;
   int dimension_size = first.get_coordinates().size();
@@ -45,6 +32,7 @@ float Solution::calculate_euclidean_distance(Point first, Point second) const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Solution& solution) {
+  os << "ObjetiveFunction: " << solution.calculate_objetive_function() << "\n";
   for (auto&& point : solution.get_list_points()) {
     os << point;
   }

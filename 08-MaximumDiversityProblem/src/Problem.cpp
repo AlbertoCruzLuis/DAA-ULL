@@ -6,8 +6,22 @@
 
 Problem::Problem(std::string file_name) {
   file_.open(file_name, std::fstream::in);
+  file_name_ = file_name;
   analize_file();
 }
+
+Problem::Problem(const Problem& problem) {
+  points_size_ = problem.points_size_;
+  dimension_size_ = problem.dimension_size_;
+  list_points_ = problem.list_points_;
+  file_name_ = problem.file_name_;
+}
+
+std::string Problem::get_file_name() const { return file_name_; }
+
+int Problem::get_points_size() const { return points_size_; }
+
+int Problem::get_dimension_size() const { return dimension_size_; }
 
 std::vector<Point> Problem::get_list_points() const { return list_points_; }
 
@@ -71,6 +85,13 @@ Point Problem::calculate_center(std::vector<Point> points) const {
   }
 
   return center;
+}
+
+Problem& Problem::operator=(const Problem& problem) {
+  points_size_ = problem.points_size_;
+  dimension_size_ = problem.dimension_size_;
+  list_points_ = problem.list_points_;
+  file_name_ = problem.file_name_;
 }
 
 std::ostream& operator<<(std::ostream& os, const Problem& problem) {

@@ -17,8 +17,8 @@ class Solution {
   void add_point(Point point);
 
   std::vector<Point> get_list_points() const;
+  std::vector<Point>& get_list_points();
 
-  Point calculate_center(std::vector<Point> points) const;
   float calculate_euclidean_distance(Point first, Point second) const;
   float calculate_objetive_function() const;
 

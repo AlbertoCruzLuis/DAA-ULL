@@ -13,11 +13,17 @@ class Problem {
   int dimension_size_;
   std::vector<Point> list_points_;
   std::fstream file_;
+  std::string file_name_;
 
  public:
+  Problem() {}
+  Problem(const Problem& problem);
   Problem(std::string file_name);
   ~Problem() {}
 
+  std::string get_file_name() const;
+  int get_points_size() const;
+  int get_dimension_size() const;
   std::vector<Point> get_list_points() const;
 
   void analize_file();
@@ -27,6 +33,8 @@ class Problem {
 
   float calculate_euclidean_distance(Point first, Point second) const;
   Point calculate_center(std::vector<Point> points) const;
+
+  Problem& operator=(const Problem& problem);
 
   friend std::ostream& operator<<(std::ostream& os, const Problem& problem);
 };
