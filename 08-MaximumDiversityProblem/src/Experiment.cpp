@@ -2,6 +2,7 @@
 
 #include <regex>
 
+#include "Algorithms/GRASP.hpp"
 #include "Algorithms/Greedy.hpp"
 #include "Strategy.hpp"
 #include "Timer/timer.cpp"
@@ -33,6 +34,22 @@ void Experiment::greedy(int size_solution) {
   });
 }
 
+void Experiment::grasp(int size_solution,
+                       NeighbourAlgorithm* neighbourAlgorithm, int size_rcl,
+                       int max_iterations) {
+  type_algorithm_ = "grasp";
+  size_solution_ = size_solution;
+  max_iterations_ = max_iterations;
+  rcl_size_ = size_rcl;
+
+  cpu_time_ = timer(
+      [this, size_solution, neighbourAlgorithm, size_rcl, max_iterations]() {
+        Strategy strategy(new GRASP(size_solution, neighbourAlgorithm, size_rcl,
+                                    max_iterations));
+        solution_ = strategy.run(problem_);
+      });
+}
+
 std::ostream& Experiment::show_table(std::ostream& os) {
   std::string problem_name = get_problem().get_file_name();
   problem_name = std::regex_replace(problem_name, std::regex("examples/"), "");
@@ -60,7 +77,7 @@ void Experiment::header_extra_info(std::ostream& os) const {
 
 void Experiment::algorithm_extra_info(std::ostream& os) const {
   if (type_algorithm_ == "grasp") {
-    os << "Iter   |LRC|    ";
+    os << max_iterations_ << "     " << rcl_size_ << "    ";
   }
 }
 

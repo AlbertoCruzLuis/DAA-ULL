@@ -31,6 +31,8 @@ class Problem {
   void parse_dimension_size();
   void parse_points();
 
+  std::vector<Point> unproccessed_points(std::vector<Point> proccessed_points);
+
   float calculate_euclidean_distance(Point first, Point second) const;
   Point calculate_center(std::vector<Point> points) const;
 

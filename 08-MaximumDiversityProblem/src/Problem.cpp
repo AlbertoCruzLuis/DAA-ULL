@@ -59,6 +59,24 @@ void Problem::parse_points() {
   }
 }
 
+std::vector<Point> Problem::unproccessed_points(
+    std::vector<Point> proccessed_points) {
+  std::vector<Point> unprocessed_points;
+
+  std::copy_if(list_points_.begin(), list_points_.end(),
+               std::back_inserter(unprocessed_points),
+               [proccessed_points](Point point) {
+                 for (auto&& proccessed_point : proccessed_points) {
+                   if (proccessed_point.get_id() == point.get_id()) {
+                     return false;
+                   }
+                 }
+                 return true;
+               });
+
+  return unprocessed_points;
+}
+
 float Problem::calculate_euclidean_distance(Point first, Point second) const {
   float distance = 0;
   int dimension_size = first.get_coordinates().size();

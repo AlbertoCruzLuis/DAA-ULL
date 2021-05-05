@@ -11,7 +11,7 @@ Solution LocalSearch::execute(Solution& solution) {
     std::vector<Solution> neighbours =
         neighbour_algorithm_->generateNeighbour(solution);
     for (auto&& neighbour : neighbours) {
-      if (neighbour.calculate_objetive_function() <
+      if (neighbour.calculate_objetive_function() >
           best_solution.calculate_objetive_function()) {
         best_solution = neighbour;
       }

@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+#include "NeighbourAlgorithms/NeighbourAlgorithm.hpp"
 #include "Problem.hpp"
 #include "Solution.hpp"
 
@@ -13,6 +14,8 @@ class Experiment {
   Solution solution_;
   int size_solution_;
   float cpu_time_;
+  int max_iterations_;
+  int rcl_size_;
 
  public:
   Experiment(Problem problem, std::string type_algorithm);
@@ -26,6 +29,8 @@ class Experiment {
   Problem get_problem() const;
 
   void greedy(int size_solution);
+  void grasp(int size_solution, NeighbourAlgorithm* neighbourAlgorithm,
+             int size_rcl = 3, int max_iterations = 100);
   std::ostream& show_table(std::ostream& os);
   void algorithm_extra_info(std::ostream& os) const;
   void header_extra_info(std::ostream& os) const;
