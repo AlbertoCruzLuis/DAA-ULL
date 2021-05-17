@@ -25,6 +25,7 @@ class Problem {
   int get_points_size() const;
   int get_dimension_size() const;
   std::vector<Point> get_list_points() const;
+  Point get_point(int id);
 
   void analize_file();
   void parse_points_size();

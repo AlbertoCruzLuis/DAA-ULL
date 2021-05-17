@@ -25,6 +25,15 @@ int Problem::get_dimension_size() const { return dimension_size_; }
 
 std::vector<Point> Problem::get_list_points() const { return list_points_; }
 
+Point Problem::get_point(int id) {
+  for (auto&& point : list_points_) {
+    if (point.get_id() == id) {
+      return point;
+    }
+  }
+  return Point(-1);
+}
+
 void Problem::analize_file() {
   parse_points_size();
   parse_dimension_size();

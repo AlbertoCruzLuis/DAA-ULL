@@ -2,6 +2,7 @@
 
 #include <regex>
 
+#include "Algorithms/BranchBound.hpp"
 #include "Algorithms/GRASP.hpp"
 #include "Algorithms/Greedy.hpp"
 #include "Strategy.hpp"
@@ -50,54 +51,75 @@ void Experiment::grasp(int size_solution,
       });
 }
 
+void Experiment::branch_bound(int size_solution, Solution solution,
+                              int expansion_strategy) {
+  type_algorithm_ = "branch_bound";
+  size_solution_ = size_solution;
+  expansion_strategy_ = expansion_strategy;
+
+  cpu_time_ = timer([this, size_solution, solution, expansion_strategy]() {
+    Strategy strategy(
+        new BranchBound(size_solution, solution, expansion_strategy));
+    solution_ = strategy.run(problem_);
+  });
+}
+
 std::ostream& Experiment::show_table(std::ostream& os) {
   std::string problem_name = get_problem().get_file_name();
   problem_name = std::regex_replace(problem_name, std::regex("examples/"), "");
 
-  os << problem_name << " " << get_problem().get_points_size() << "  "
-     << get_problem().get_dimension_size() << "   " << get_size_solution()
-     << "   ";
+  os << "| " << problem_name << " | " << get_problem().get_points_size()
+     << "  | " << get_problem().get_dimension_size() << "   | "
+     << get_size_solution() << "   |";
 
   algorithm_extra_info(os);
 
-  os << get_solution().calculate_objetive_function() << "  ";
-  os << "[";
+  os << get_solution().calculate_objetive_function() << "  |";
+  os << " [";
   for (auto&& point : get_solution().get_list_points()) {
     os << point.get_id() << " ";
   }
-  os << "]   " << get_cpu_time() << "ms\n";
+  os << "]  |" << get_cpu_time() << "ms |\n";
   return os;
 }
 
 void Experiment::header_extra_info(std::ostream& os) const {
   if (type_algorithm_ == "grasp") {
-    os << "Iter   |LRC|    ";
+    os << "| Iter   | LRC  ";
+  }
+  if (type_algorithm_ == "branch_bound") {
+    os << "| Strategy ";
   }
 }
 
 void Experiment::algorithm_extra_info(std::ostream& os) const {
   if (type_algorithm_ == "grasp") {
-    os << max_iterations_ << "     " << rcl_size_ << "    ";
+    os << max_iterations_ << "     |" << rcl_size_ << "    |";
+  }
+  if (type_algorithm_ == "branch_bound") {
+    std::string name_strategy =
+        expansion_strategy_ == 0 ? "Minimum Level" : "Deep";
+    os << name_strategy << "  |";
   }
 }
 
 std::ostream& operator<<(std::ostream& os, const Experiment& experiment) {
   os << experiment.get_type_algorithm() << "\n";
-  os << "-----------------------------------------------------------\n";
-  os << "Problema"
+  os << "| Problema"
      << "         ";
-  os << "n"
+  os << "| n"
      << "   ";
-  os << "K"
+  os << "| K"
      << "   ";
-  os << "m"
+  os << "| m"
      << "   ";
   experiment.header_extra_info(os);
-  os << "z"
-     << "        ";
-  os << "S"
-     << "               ";
-  os << "CPU\n";
-  os << "-----------------------------------------------------------";
+  os << "| z"
+     << "       ";
+  os << "| S"
+     << "          ";
+  os << "| CPU |\n";
+  os << "|------------------|-----|-----|-----|--------|------|-------|"
+        "--|----|---|";
   return os;
 }

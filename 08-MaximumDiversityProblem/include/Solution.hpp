@@ -12,6 +12,7 @@ class Solution {
 
  public:
   Solution() {}
+  Solution(std::vector<Point> list_points);
   ~Solution() {}
 
   void add_point(Point point);

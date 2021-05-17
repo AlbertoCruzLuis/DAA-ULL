@@ -12,6 +12,6 @@ class Strategy {
   Strategy(Algorithm* algorithm) { algorithm_ = algorithm; }
   ~Strategy() {}
 
-  Solution run(Problem& problem) { return algorithm_->execute(problem); }
+  Solution run(Problem problem) { return algorithm_->execute(problem); }
 };
 #endif  // STRATEGY_H

@@ -16,6 +16,7 @@ class Experiment {
   float cpu_time_;
   int max_iterations_;
   int rcl_size_;
+  int expansion_strategy_;
 
  public:
   Experiment(Problem problem, std::string type_algorithm);
@@ -31,6 +32,8 @@ class Experiment {
   void greedy(int size_solution);
   void grasp(int size_solution, NeighbourAlgorithm* neighbourAlgorithm,
              int size_rcl = 3, int max_iterations = 100);
+  void branch_bound(int size_solution, Solution solution,
+                    int expansion_strategy = 0);
   std::ostream& show_table(std::ostream& os);
   void algorithm_extra_info(std::ostream& os) const;
   void header_extra_info(std::ostream& os) const;

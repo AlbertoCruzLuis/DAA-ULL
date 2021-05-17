@@ -2,6 +2,10 @@
 
 #include <cmath>
 
+Solution::Solution(std::vector<Point> list_points) {
+  list_points_ = list_points;
+}
+
 std::vector<Point> Solution::get_list_points() const { return list_points_; }
 
 std::vector<Point>& Solution::get_list_points() { return list_points_; }
